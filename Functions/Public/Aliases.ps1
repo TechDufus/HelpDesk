@@ -3,9 +3,9 @@
 ######################
 
 Set-Alias FName FirstName
-Set-Alias FirstName Get-FirstName
+Set-Alias FirstName Get-UsersWithFirstName
 Set-Alias LName LastName
-Set-Alias LastName Get-LastName
+Set-Alias LastName Get-UsersWithLastName
 Set-Alias GLO Get-LockedOutADUsers
 Set-Alias LU Lookup
 Set-Alias Lookup Get-User
