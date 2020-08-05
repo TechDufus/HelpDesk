@@ -107,7 +107,7 @@ Function Get-User() {
                 Write-Verbose "Displaying user attributes."
                 $User
 
-                if ($PossibleComputers.IsPresent) {
+                if ($PossibleComputer.IsPresent) {
                     <#
                     $ComputerManagedBy = Get-ADComputer -Filter {ManagedBy -eq ((Get-ADUser -Identity $Username).DistinguishedName)}
                     if ($ComputerManagedBy) {
