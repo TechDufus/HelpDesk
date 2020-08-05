@@ -18,7 +18,7 @@
     System.Object[]
         Objects generated from the AD query.
 .EXAMPLE
-    PS>Get-FirstName Matt -Properties Title
+    PS>Get-UsersWithFirstName Matt -Properties Title
 
     Name                          SamAccountName Office          Title
     ----                          -------------- ------          -----
@@ -49,7 +49,7 @@
     Author: Matthew J. DeGarmo
     GitHub: https://github.com/matthewjdegarmo
 #>
-function Get-FirstName() {
+function Get-UsersWithFirstName() {
     param (
         [string[]] $Properties,
 
@@ -74,9 +74,7 @@ function Get-FirstName() {
 
     if ($i -eq 1) {
         Lookup -Username $Users.SamAccountName
-    }
-    else {
-
+    } else {
         ##Set up the default display set and create the member set object for use later on
         #Configure a default display set
         if ($Properties -eq '*') {
@@ -93,8 +91,6 @@ function Get-FirstName() {
         #Create the default property display set
         $DefaultDisplayPropertySet = New-Object System.Management.Automation.PSPropertySet('DefaultDisplayPropertySet', [string[]]$DefaultDisplaySet)
         $PSStandardMembers = [System.Management.Automation.PSMemberInfo[]]@($DefaultDisplayPropertySet)
-
-        #$Users = Get-ADUser -Filter {GivenName -eq $FirstName} -Properties GivenName,Surname,Manager,Office,OfficePhone,Title
 
         $Results = $Users | ForEach-Object {
             try {
