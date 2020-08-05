@@ -89,8 +89,9 @@ Function Get-User() {
             }
             try {
                 Write-Verbose "Checking for Username: $Username details."
-                $User = Get-ADUser -Identity $Username -Properties "DisplayName", "Department", "Title", "Office", "Mail", "OfficePhone", "IPPhone", "Manager", "Description", "EmployeeID", "pwdLastSet" -ErrorAction Stop | `
-                    Select-Object DisplayName, @{Name = 'Manager'; Expression = { $(Get-ADUser $_.Manager).Name } }, Department, Title, Office, Mail, OfficePhone, IPPhone, EmployeeID, SamAccountName, Description, @{Name = 'PassLastSet'; Expression = { [DateTime]::FromFileTime($_.pwdLastSet) } }
+                $AllUserInfo = Get-ADUser -Identity $Username -Properties "DisplayName", "Department", "Title", "Office", "Mail", "OfficePhone", "IPPhone", "Manager", "Description", "EmployeeID", "pwdLastSet" -ErrorAction Stop
+                $User = $AllUserInfo | `
+                        Select-Object DisplayName, @{Name = 'Manager'; Expression = { $(Get-ADUser $_.Manager).Name } }, Department, Title, Office, Mail, OfficePhone, IPPhone, EmployeeID, SamAccountName, Description, @{Name = 'PassLastSet'; Expression = { [DateTime]::FromFileTime($_.pwdLastSet) } }
             }
             catch {
                 Write-Verbose "Failed to lookup User attributes"
@@ -108,29 +109,32 @@ Function Get-User() {
                 $User
 
                 if ($PossibleComputer.IsPresent) {
-                    <#
-                    $ComputerManagedBy = Get-ADComputer -Filter {ManagedBy -eq ((Get-ADUser -Identity $Username).DistinguishedName)}
+                    
+                    $UserDistinguishedName = $AllUserInfo.DistinguishedName
+                    $ComputerManagedBy = Get-ADComputer -Filter {ManagedBy -eq $UserDistinguishedName}
                     if ($ComputerManagedBy) {
                         Write-Verbose "Found possible computers. Displaying results."
                         Write-Output "Possible Computers..."
-                        $ComputerManagedBy.Name
-                    } else { ## PLACE BELOW SURNAME CODE HERE: Line 119 - 134 ## Haven't tested this yet.}
-                    #>
-                    $Surname = "*$((Get-ADUser -Identity $Username -Properties SurName).SurName)*"
-                    Write-Verbose "Checking for possible computers based on last name: $Surname"
-                    try {
-                        $Filter = "Description -like `"$Surname`" -and Enabled -eq `"$true`""
-                        $PossibleComputers = Get-ADComputer -filter $Filter -Properties Description -ErrorAction Stop | Select-Object Name, Description
-                    }
-                    catch {}
-                    if ($PossibleComputers) {
-                        Write-Verbose "Found possible computers. Displaying results."
-                        Write-Output "Possible Computers..."
-                        $PossibleComputers
-                    }
-                    else {
-                        Write-Verbose "No possible PCs were found."
-                        Write-Output "Unable to locate possible Computers for this user..."
+                        $ComputerManagedBy.Name | ForEach-Object {
+                            Get-ADComputer -Identity $_ -Properties Description -ErrorAction Stop | Select-Object Name, Description
+                        }
+                    } else { 
+                        $Surname = "*$((Get-ADUser -Identity $Username -Properties SurName).SurName)*"
+                        Write-Verbose "Checking for possible computers based on last name: $Surname"
+                        try {
+                            $Filter = "Description -like `"$Surname`" -and Enabled -eq `"$true`""
+                            $PossibleComputers = Get-ADComputer -filter $Filter -Properties Description -ErrorAction Stop | Select-Object Name, Description
+                        }
+                        catch {}
+                        if ($PossibleComputers) {
+                            Write-Verbose "Found possible computers. Displaying results."
+                            Write-Output "Possible Computers..."
+                            $PossibleComputers
+                        }
+                        else {
+                            Write-Verbose "No possible PCs were found."
+                            Write-Output "Unable to locate possible Computers for this user..."
+                        }
                     }
                 }
             }
