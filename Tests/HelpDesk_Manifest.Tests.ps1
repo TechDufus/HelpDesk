@@ -1,9 +1,11 @@
-$ModuleManifestName = 'HelpDesk.psd1'
+
+$ModuleName = "AdminToolkit"
+$ModuleManifestName ="$ModuleName.psd1"
 $ModuleManifestPath = [System.IO.Path]::Combine($PSScriptRoot,"..","$ModuleManifestName")
 # $ModuleManifestPath = "$PSScriptRoot\..\$ModuleManifestName"
 $ManifestInfo = (Test-ModuleManifest -Path $ModuleManifestPath)
 
-Describe 'HelpDesk Manifest Tests' {
+Describe "$ModuleName Manifest Tests" {
     It 'Passes Test-ModuleManifest' {
         $Manifest = $ManifestInfo
         $Manifest | Should Not BeNullOrEmpty
