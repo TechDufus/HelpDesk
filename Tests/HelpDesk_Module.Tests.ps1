@@ -1,8 +1,7 @@
 
-
-
-$ModuleManifestName = 'HelpDesk.psd1'
 $ModuleName = "HelpDesk"
+$ModuleManifestName = "$ModuleName.psd1"
+
 $ModuleManifestPath = [System.IO.Path]::Combine($PSScriptRoot,"..","$ModuleManifestName")
 $ModulePath = [System.IO.Path]::Combine($PSScriptRoot,"..")
 $AliasesPath = [System.IO.Path]::Combine($PSScriptRoot,"..","Functions","Public","Aliases.ps1")
@@ -22,7 +21,7 @@ if (Get-Module $ModuleName) {
 
 Import-Module $ModuleManifestPath
 
-Describe "HelpDesk Module Tests" {
+Describe "$ModuleName Module Tests" {
     It "Imports Successfully" {
         Import-Module $ModuleManifestPath -Force
         Get-Module $ModuleName | Should -Be $true
