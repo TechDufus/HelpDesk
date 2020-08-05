@@ -1,6 +1,10 @@
 # HelpDesk
 Many useful ActiveDirectory and other admin-type utilities typical in a HelpDesk role.
 
+![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square) 
+<!--
+[![Known Vulnerabilities](https://snyk.io/test/github/dwyl/hapi-auth-jwt2/badge.svg)](https://snyk.io/test/github/matthewjdegarmo/HelpDesk)
+-->
 ## Installing
 
 ```powershell
