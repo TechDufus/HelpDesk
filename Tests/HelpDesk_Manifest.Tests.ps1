@@ -1,5 +1,5 @@
 
-$ModuleName = "AdminToolkit"
+$ModuleName = "HelpDesk"
 $ModuleManifestName ="$ModuleName.psd1"
 $ModuleManifestPath = [System.IO.Path]::Combine($PSScriptRoot,"..","$ModuleManifestName")
 # $ModuleManifestPath = "$PSScriptRoot\..\$ModuleManifestName"
