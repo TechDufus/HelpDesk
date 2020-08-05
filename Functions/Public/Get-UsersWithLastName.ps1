@@ -10,7 +10,7 @@
 
     Example
     -------
-    Get-LastName Matthew | Get-Member
+    Get-UsersWithLastName Matthew | Get-Member
 .INPUTS
     System.String
         This function does not accept pipeline data. The values for all parameters must be specified.
@@ -18,7 +18,7 @@
     System.Object[]
         Objects generated from the AD query.
 .EXAMPLE
-    PS>Get-LastName Smith -Property Title
+    PS>Get-UsersWithLastName Smith -Property Title
 
     Name            SamAccountName Office         Title
     ----            -------------- ------         -----
@@ -48,7 +48,7 @@
     Author: Matthew J. DeGarmo
     GitHub: https://github.com/matthewjdegarmo
 #>
-function Get-LastName() {
+function Get-UsersWithLastName() {
     param (
         [string[]]$Properties,
         [Parameter(Mandatory = $true, Position = 0)]
