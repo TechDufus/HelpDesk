@@ -67,7 +67,7 @@ Function Get-User() {
         [Alias('SAMAccountName')]
         [String]$Username,
         [switch]$Groups,
-        [switch]$PossibleComputer
+        [switch]$Computers
     )
 
     begin {
@@ -108,8 +108,7 @@ Function Get-User() {
                 Write-Verbose "Displaying user attributes."
                 $User
 
-                if ($PossibleComputer.IsPresent) {
-                    
+                if ($Computers.IsPresent) {
                     $UserDistinguishedName = $AllUserInfo.DistinguishedName
                     $ComputerManagedBy = Get-ADComputer -Filter {ManagedBy -eq $UserDistinguishedName}
                     if ($ComputerManagedBy) {
