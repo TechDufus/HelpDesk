@@ -80,8 +80,8 @@
         
         Change Log:
 
-        Version: 2.0 - Added the FilePath parameter, and loads of error-checking to detect if computername is used or filepath used without having to specify -Computername of -FilePath
-                        Example: You can use PCLookup 209999      AND       PCLookup C:\temp\file.txt       AND        PCLookup C:\temp\nonexistentfile.csv
+        Version: 2.0 - Added the FilePath parameter, and loads error-checking to detect if computername is used or filepath used without having to specify -Computername or -FilePath
+                        Example: You can use PCLookup test-pc      AND       PCLookup C:\temp\file.txt       AND        PCLookup C:\temp\nonexistentfile.csv
                         This script will now generate results, OR display the correct error message for all these scenarios.
         Version: 1.0 - Function Creation.
     #>
