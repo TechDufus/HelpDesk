@@ -1,3 +1,5 @@
+#!/usr/bin/env pwsh
+
 <#
 .SYNOPSIS
     This function performs a search of users in ActiveDirectory for a first name.
@@ -50,6 +52,7 @@
     GitHub: https://github.com/matthewjdegarmo
 #>
 function Get-UsersWithFirstName() {
+    [CmdletBinding()]
     param (
         [string[]] $Properties,
 
