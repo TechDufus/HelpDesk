@@ -1,3 +1,5 @@
+#!/usr/bin/env pwsh
+
 <#
 .SYNOPSIS
     Calculate the number of days between today and any future (or past) date.
@@ -38,6 +40,7 @@
     GitHub: https://github.com/matthewjdegarmo
 #>
 Function Get-DaysUntil() {
+    [CmdletBinding()]
     param(
         [Parameter(Mandatory)]
         [string] $Date
