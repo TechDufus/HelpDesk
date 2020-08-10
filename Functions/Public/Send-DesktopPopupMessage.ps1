@@ -31,6 +31,7 @@
     GitHub: https://github.com/matthewjdegarmo
 #>
 function Send-DesktopPopupMessage() {
+    [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true, Position = 0)]
         [string[]] $ComputerName,
