@@ -1,3 +1,5 @@
+#!/usr/bin/env pwsh
+
 <#
 .SYNOPSIS
     Retrieves a list of users in the local Administrators group.
@@ -25,6 +27,7 @@
 #>
 #Requires -Assembly C:\Windows\system32\net.exe
 function Get-LocalAdmin() {
+    [CmdletBinding()]
     param(
         [Parameter()]
         [string] $ComputerName = $env:COMPUTERNAME
