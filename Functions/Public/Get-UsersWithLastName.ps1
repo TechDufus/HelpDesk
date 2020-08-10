@@ -1,3 +1,5 @@
+#!/usr/bin/env pwsh
+
 <#
 .SYNOPSIS
     This function performs a search of users in ActiveDirectory for a last name.
@@ -49,6 +51,7 @@
     GitHub: https://github.com/matthewjdegarmo
 #>
 function Get-UsersWithLastName() {
+    [CmdletBinding()]
     param (
         [string[]]$Properties,
         [Parameter(Mandatory = $true, Position = 0)]
