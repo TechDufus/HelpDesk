@@ -1,6 +1,7 @@
 # HelpDesk
 Many useful ActiveDirectory and other admin-type utilities typical in a HelpDesk role.
 
+[![Build Status](https://dev.azure.com/matthewjdegarmo/HelpDesk/_apis/build/status/matthewjdegarmo.HelpDesk?branchName=master)](https://dev.azure.com/matthewjdegarmo/HelpDesk/_build/latest?definitionId=2&branchName=master)
 ![License](https://img.shields.io/github/license/matthewjdegarmo/HelpDesk)
 <!--
 [![Known Vulnerabilities](https://snyk.io/test/github/dwyl/hapi-auth-jwt2/badge.svg)](https://snyk.io/test/github/matthewjdegarmo/HelpDesk)
