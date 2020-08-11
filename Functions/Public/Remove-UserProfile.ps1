@@ -54,6 +54,7 @@ function Remove-UserProfile() {
         Try {
             if ($PSBoundParameters.ContainsKey('All')) {
                 $Params = @{}
+                $Confirm = $true
                 if ($PSBoundParameters.ContainsKey('ComputerName')) {
                     $Params += @{ ComputerName = $ComputerName.ToUpper()}
                 } else {$ComputerName = $env:COMPUTERNAME}
