@@ -1,6 +1,6 @@
 $ModuleName = "HelpDesk"
 $ModulePathTarget = "$ModuleName`_Build"
-$ModuleTargetFile = [System.IO.Path]::Combine($ModuleTargetPath,$ModuleName,"$ModuleName.psm1")
+$ModuleTargetFile = [System.IO.Path]::Combine($ModulePathTarget,$ModuleName,"$ModuleName.psm1")
 $ManifestPathSource = [System.IO.Path]::Combine($ModuleName,"$ModuleName.psd1")
 $ManifestPathTarget = [System.IO.Path]::Combine($ModulePathTarget,$ModuleName,"$ModuleName.psd1")
 
