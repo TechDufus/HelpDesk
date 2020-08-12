@@ -1,8 +1,11 @@
 # HelpDesk
 Many useful ActiveDirectory and other admin-type utilities typical in a HelpDesk role.
 
-[![Build Status](https://dev.azure.com/matthewjdegarmo/HelpDesk/_apis/build/status/matthewjdegarmo.HelpDesk?branchName=master&jobName=Job)](https://dev.azure.com/matthewjdegarmo/HelpDesk/_build/latest?definitionId=2&branchName=master)
-![License](https://img.shields.io/github/license/matthewjdegarmo/HelpDesk)
+[![Build Status](https://dev.azure.com/matthewjdegarmo/HelpDesk/_apis/build/status/matthewjdegarmo.HelpDesk?branchName=master)](https://dev.azure.com/matthewjdegarmo/HelpDesk/_build/latest?definitionId=1&branchName=master)
+[![PSGallery](https://img.shields.io/powershellgallery/v/HelpDesk?color=G&label=PowerShell%20Gallery)](https://www.powershellgallery.com/packages/HelpDesk/)
+[![Downloads](https://img.shields.io/powershellgallery/dt/HelpDesk?label=Downloads)](https://www.powershellgallery.com/packages/HelpDesk/)
+[![License](https://img.shields.io/github/license/matthewjdegarmo/HelpDesk?color=g&label=License)](https://github.com/matthewjdegarmo/HelpDesk/blob/master/LICENSE)
+![CodeSize](https://img.shields.io/github/languages/code-size/matthewjdegarmo/HelpDesk?label=Code%20Size)
 <!--
 [![Known Vulnerabilities](https://snyk.io/test/github/dwyl/hapi-auth-jwt2/badge.svg)](https://snyk.io/test/github/matthewjdegarmo/HelpDesk)
 -->
