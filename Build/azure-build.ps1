@@ -4,7 +4,7 @@ $ModuleTargetFile = [System.IO.Path]::Combine($ModuleTargetPath,$ModuleName,"$Mo
 $ManifestPathSource = [System.IO.Path]::Combine($ModuleName,"$ModuleName.psd1")
 $ManifestPathTarget = [System.IO.Path]::Combine($ModulePathTarget,$ModuleName,"$ModuleName.psd1")
 
-$ScriptsPath = [System.IO.Path]::Combine($ModulePathSource,"Functions",'*.ps1')
+$ScriptsPath = [System.IO.Path]::Combine($ModuleName,"Functions",'*.ps1')
 $ScriptFunctions = @( Get-ChildItem -Path $ScriptsPath -ErrorAction SilentlyContinue -Recurse )
 
 New-Item -Name "$ModuleName" -Path "$ModulePathTarget" -ItemType Directory -Force
