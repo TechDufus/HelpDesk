@@ -3,5 +3,7 @@
         Install-Module -Name Pester -MinimumVersion 5.0.0 -Force -SkipPublisherCheck
       }
       
-      Invoke-Pester "$PSScriptRoot/Tests/" -OutputFile "./Test-Pester.XML" -OutputFormat "NUnitXML"
+      $TestsPath = [System.IO.Path]::Combine($PSScriptRoot,'..','Tests')
+      
+      Invoke-Pester $TestsPath -OutputFile "./Test-HelpDeskPester.XML" -OutputFormat "NUnitXML"
       
