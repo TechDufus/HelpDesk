@@ -35,17 +35,11 @@ function Get-LockedOutADUsers() {
     param ()
 
     $Users = Search-ADAccount -LockedOut | Foreach-Object { Get-ADUser $_.SamAccountName -Properties LockoutTime | Where-Object { $_.Name -ne 'Guest' } | Select-Object Name, SAMAccountName, LockoutTime | Sort-Object LockoutTime }
-
-    if ($Users) {
-        foreach ($User in $Users) {
-            $Date = [DateTime]$User.LockoutTime
-            $User.LockoutTime = $Date.AddYears(1600).ToLocalTime()
-        }
-        $Users
+    foreach ($User in $Users) {
+        $Date = [DateTime]$User.LockoutTime
+        $User.LockoutTime = $Date.AddYears(1600).ToLocalTime()
     }
-    else {
-        Write-Output "No users are currently locked out."
-    }
+    $Users
 }
 
 
