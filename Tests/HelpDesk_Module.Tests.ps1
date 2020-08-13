@@ -85,6 +85,25 @@ InModuleScope HelpDesk {
                 $PrivateImportSuccessfulFunctions = Compare-Object $PrivateImportedCommands $PrivateFiles.BaseName -IncludeEqual -ExcludeDifferent
                 $PrivateImportSuccessfulFunctions.InputObject | Should -Be $PrivateFiles.BaseName
             }
+            
+            Get-ChildItem ([System.IO.Path]::Combine($PSScriptRoot,'..','Functions','Private','*.ps1')) -Exclude *tests.ps1, Aliases.ps1 | ForEach-Object {
+                Context "Test File: $($_.BaseName)" {
+                    $PSDefaultParameterValues = @{
+                        "It:TestCases" = @{ CurrentFunction = $_ }
+                    }
+                    It "Should be an advanced function" {
+                        $CurrentFunction.FullName | Should -FileContentMatch 'function'
+                        $CurrentFunction.FullName | Should -FileContentMatch 'cmdletbinding'
+                        $CurrentFunction.FullName | Should -FileContentMatch 'param'
+                    }
+                    It "Should be valid PowerShell code" {
+                        $FileContent = Get-Content -Path $CurrentFunction.FullName -ErrorAction Stop
+                        $Errors = $null
+                        $null = [System.Management.Automation.PSParser]::Tokenize($FileContent, [ref]$errors)
+                        $errors.Count | Should -be 0
+                    }
+                }
+            }
         }
     }
 }
