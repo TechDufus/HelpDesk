@@ -1,3 +1,4 @@
+#Region ConvertExpressServiceCodeTo-ServiceTag
 function ConvertExpressServiceCodeTo-ServiceTag() {    
     [CmdletBinding()]
     param ([parameter(valuefrompipeline=$true, HelpMessage="Integer number to convert")][int64]$ExpressServiceCode="")
@@ -12,5 +13,4 @@ function ConvertExpressServiceCodeTo-ServiceTag() {
 
     $ServiceTag
 }
-
-
+#EndRegion ConvertExpressServiceCodeTo-ServiceTag

@@ -1,3 +1,4 @@
+#Region Get-LockedOutADUsers
 <#
 .SYNOPSIS
     This function performs a search of users in ActiveDirectory who are currently locked out.
@@ -41,6 +42,4 @@ function Get-LockedOutADUsers() {
     }
     $Users
 }
-
-
-
+#EndRegion Get-LockedOutADUsers

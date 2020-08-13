@@ -1,3 +1,4 @@
+#Region Remove-LocalAdmin
 <#
 .SYNOPSIS
     Removes user from local admin group.
@@ -56,8 +57,4 @@ function Remove-LocalAdmin() {
 
     end {}
 }
-
-
-
-
-
+#EndRegion Remove-LocalAdmin

@@ -1,3 +1,4 @@
+#Region Get-DellTags
 <#
 .SYNOPSIS
     Gather Dell Tag information.
@@ -96,6 +97,4 @@ function Get-DellTags() {
 
     end {}
 }
-
-
-
+#EndRegion Get-DellTags

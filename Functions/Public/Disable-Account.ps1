@@ -1,3 +1,4 @@
+#Region Disable-Account
 <#
 .SYNOPSIS
     Disable an enabled AD Account.
@@ -38,5 +39,4 @@ Function Disable-Account {
 
     Disable-ADAccount -Identity $Username -Confirm
 }
-
-
+#EndRegion Disable-Account

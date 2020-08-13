@@ -1,4 +1,4 @@
-# Get-UsersWithLastName
+#Region $HelpDeskADLastNameArgCompleter
 $HelpDeskADLastNameArgCompleter = {
     param ($CommandName, $ParameterName, $StringMatch)
     if ($null -eq $StringMatch) {
@@ -19,4 +19,4 @@ $HelpDeskADLastNameArgCompleter = {
     return $QuotedNames
 }
 Register-ArgumentCompleter -CommandName Get-UsersWithLastName -ParameterName LastName -ScriptBlock $HelpDeskADLastNameArgCompleter
-
+#EndRegion $HelpDeskADLastNameArgCompleter

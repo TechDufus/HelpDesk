@@ -1,3 +1,4 @@
+#Region Add-LocalAdmin
 <#
 .SYNOPSIS
     Adds user to local admin group.
@@ -64,4 +65,4 @@ Function Add-LocalAdmin {
 
     end {}
 }
-
+#EndRegion Add-LocalAdmin

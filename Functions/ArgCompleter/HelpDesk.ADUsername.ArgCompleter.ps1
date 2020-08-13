@@ -1,3 +1,4 @@
+#Region $HelpDeskADUsernameArgCompleter
 $HelpDeskADUsernameArgCompleter = {
     param ($CommandName, $ParameterName, $StringMatch)
     if ($null -eq $StringMatch) {
@@ -18,4 +19,4 @@ $HelpDeskADUsernameArgCompleter = {
     return $QuotedUsers
 }
 Register-ArgumentCompleter -CommandName Get-User, Get-OtherADUserAccounts, Reset-Password, Add-LocalAdmin, Remove-LocalAdmin, Get-LocalAdmin, Get-ADGroupsManagedByUser -ParameterName Username -ScriptBlock $HelpDeskADUsernameArgCompleter
-
+#EndRegion $HelpDeskADUsernameArgCompleter

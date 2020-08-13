@@ -1,3 +1,4 @@
+#Region Test-Administrator
 <#
 .SYNOPSIS
     Test to see if the current user / process is being run as an Administrator.
@@ -22,4 +23,4 @@ function Test-Administrator {
     )
     (New-Object Security.Principal.WindowsPrincipal $user).IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)
 }
-
+#EndRegion Test-Administrator

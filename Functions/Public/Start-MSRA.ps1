@@ -1,3 +1,4 @@
+#Region Start-MSRA
 <#
 .SYNOPSIS
     Starts Microsoft Remote Assistance
@@ -36,9 +37,5 @@ Function Start-MSRA() {
             Return "Failed to Connect to $ComputerName"
         }
     }
-}#End Function: Start-MSRA
-
-
-
-
-
+}
+#EndRegion Start-MSRA

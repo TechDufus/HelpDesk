@@ -1,3 +1,4 @@
+#Region Get-Computer
     <#
     .SYNOPSIS
         This function performs a quick lookup of an ActiveDirectory computer.
@@ -156,6 +157,4 @@ Function Get-Computer() {
     }
     end {}
 }
-
-
-
+#EndRegion Get-Computer
