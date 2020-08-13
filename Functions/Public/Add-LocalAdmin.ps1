@@ -37,7 +37,7 @@ Function Add-LocalAdmin {
         [string] $ComputerName = $env:COMPUTERNAME,
 
         [Parameter()]
-        [string] $Domain = (Get-ADDomain -Current LoggedOnUser)
+        [string] $Domain = $env:USERDOMAIN
     )
 
     begin {
