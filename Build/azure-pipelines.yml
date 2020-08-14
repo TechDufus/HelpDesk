@@ -17,7 +17,7 @@ steps:
     testResultsFiles: '**/Test-HelpDeskPester.xml'
     failTaskOnFailedTests: true
 
-- task: PublishCodeCoverageResults@1
-  inputs:
-    codeCoverageTool: 'JaCoCo'
-    summaryFileLocation: '**/Test-HelpDeskCoverage.xml'
+# - task: PublishCodeCoverageResults@1
+#   inputs:
+#     codeCoverageTool: 'JaCoCo'
+#     summaryFileLocation: '**/Test-HelpDeskCoverage.xml'
