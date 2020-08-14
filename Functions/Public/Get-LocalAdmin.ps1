@@ -1,5 +1,4 @@
-#!/usr/bin/env pwsh
-
+#Region Get-LocalAdmin
 <#
 .SYNOPSIS
     Retrieves a list of users in the local Administrators group.
@@ -41,5 +40,4 @@ function Get-LocalAdmin() {
     }
     $NetAdminObject[6..(($NetAdminObject.count) - 3)]
 }
-
-
+#EndRegion Get-LocalAdmin

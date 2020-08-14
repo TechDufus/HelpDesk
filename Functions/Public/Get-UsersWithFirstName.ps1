@@ -1,5 +1,4 @@
-#!/usr/bin/env pwsh
-
+#Region Get-UsersWithFirstName
 <#
 .SYNOPSIS
     This function performs a search of users in ActiveDirectory for a first name.
@@ -127,6 +126,4 @@ function Get-UsersWithFirstName() {
         }
     }
 }
-
-
-
+#EndRegion Get-UsersWithFirstName

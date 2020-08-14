@@ -1,3 +1,4 @@
+#Region Get-PlainText
 <#
 .SYNOPSIS
     Retrieve the Plain text string from a SecureString object.
@@ -28,5 +29,4 @@ function Get-PlainText() {
     }
     end { }
 }
-
-
+#EndRegion Get-PlainText

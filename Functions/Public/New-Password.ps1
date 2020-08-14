@@ -1,3 +1,4 @@
+#Region New-Password
 <#
 .SYNOPSIS
     Create a random password
@@ -82,7 +83,4 @@ Function New-Password () {
         }
     }
 }
-
-
-
-
+#EndRegion New-Password

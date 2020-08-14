@@ -1,3 +1,4 @@
+#Region ConvertServiceTagTo-ExpressServiceCode
 Function ConvertServiceTagTo-ExpressServiceCode{ 
     [CmdletBinding(DefaultParameterSetName='ServiceTag')]
     param( 
@@ -28,7 +29,4 @@ Function ConvertServiceTagTo-ExpressServiceCode{
 
     end{}
 }
-
-
-
-
+#EndRegion ConvertServiceTagTo-ExpressServiceCode\

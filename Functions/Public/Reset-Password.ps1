@@ -1,3 +1,4 @@
+#Region Reset-Password
 <#
 .SYNOPSIS
     Reset domain password for an ActiveDirectory user.
@@ -66,8 +67,4 @@ function Reset-Password() {
         Write-Error "$($_.Exception.Message)"
     }
 }
-
-
-
-
-
+#EndRegion Reset-Password

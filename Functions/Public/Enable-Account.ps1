@@ -1,5 +1,4 @@
-
-
+#Region Enable-Account
 <#
 .SYNOPSIS
     Quickly enable a disabled ActiveDirectory user account
@@ -41,7 +40,4 @@ Function Enable-Account {
 
     Enable-ADAccount -Identity $Username -Confirm
 }
-
-
-
-
+#EndRegion Enable-Account

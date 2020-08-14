@@ -1,3 +1,4 @@
+#Region Add-LocalAdmin
 <#
 .SYNOPSIS
     Adds user to local admin group.
@@ -37,7 +38,7 @@ Function Add-LocalAdmin {
         [string] $ComputerName = $env:COMPUTERNAME,
 
         [Parameter()]
-        [string] $Domain = (Get-ADDomain -Current LoggedOnUser)
+        [string] $Domain = $env:USERDOMAIN
     )
 
     begin {
@@ -64,4 +65,4 @@ Function Add-LocalAdmin {
 
     end {}
 }
-
+#EndRegion Add-LocalAdmin

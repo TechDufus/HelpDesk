@@ -1,5 +1,4 @@
-#!/usr/bin/env pwsh
-
+#Region Get-DaysUntil
 <#
 .SYNOPSIS
     Calculate the number of days between today and any future (or past) date.
@@ -56,6 +55,4 @@ Function Get-DaysUntil() {
 
     $Days
 }
-
-
-
+#EndRegion Get-DaysUntil

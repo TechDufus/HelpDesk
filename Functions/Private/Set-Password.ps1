@@ -1,3 +1,4 @@
+#Region Set-Password
 <#
 .SYNOPSIS
     Reset domain password for an ActiveDirectory user.
@@ -29,7 +30,4 @@ Function Set-Password {
         Set-ADUser -Identity $Username -ChangePasswordAtLogon $true
     }
 }
-
-
-
-
+#EndRegion Set-Password

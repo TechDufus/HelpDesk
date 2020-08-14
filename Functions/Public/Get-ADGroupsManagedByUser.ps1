@@ -1,5 +1,4 @@
-#!/usr/bin/env pwsh
-
+#Region Get-ADGroupsManagedByUser
 <#
 .SYNOPSIS
     Generate a list of group names owned by a specified.
@@ -34,7 +33,4 @@ function Get-ADGroupsManagedByUser() {
         Write-Error "$($_.Exception.Message) - Line Number: $($_.InvocationInfo.ScriptLineNumber)"
     }
 }
-
-
-
-
+#EndRegion Get-ADGroupsManagedByUser

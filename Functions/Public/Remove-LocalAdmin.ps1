@@ -1,3 +1,4 @@
+#Region Remove-LocalAdmin
 <#
 .SYNOPSIS
     Removes user from local admin group.
@@ -30,7 +31,7 @@ function Remove-LocalAdmin() {
         [string] $ComputerName = $env:COMPUTERNAME,
 
         [Parameter()]
-        [string] $Domain = (Get-ADDomain -Current LoggedOnUser)
+        [string] $Domain = $env:USERDOMAIN
     )
 
     begin {
@@ -56,8 +57,4 @@ function Remove-LocalAdmin() {
 
     end {}
 }
-
-
-
-
-
+#EndRegion Remove-LocalAdmin

@@ -1,3 +1,4 @@
+#Region Remove-UserProfile
 <#
 .SYNOPSIS
     Quickly delete a user profile from a computer
@@ -89,6 +90,4 @@ function Remove-UserProfile() {
 
     End {}
 }
-
-
-
+#EndRegion Remove-UserProfile
