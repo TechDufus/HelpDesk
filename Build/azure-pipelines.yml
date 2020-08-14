@@ -19,5 +19,5 @@ steps:
 
 - task: PublishCodeCoverageResults@1
   inputs:
-    codeCoverageTool: 'JaCoCo'
+    codeCoverageTool: 'Cobertura'
     summaryFileLocation: '**/Test-HelpDeskCoverage.xml'
