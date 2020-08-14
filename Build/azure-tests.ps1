@@ -5,5 +5,10 @@
       
       $TestsPath = [System.IO.Path]::Combine($PSScriptRoot,'..','Tests')
       $CodeCoverageFunctions = [System.IO.Path]::Combine($PSScriptRoot,'..','Functions','*.ps1')
-      Invoke-Pester -Script $TestsPath -OutputFile "./Test-HelpDeskPester.XML" -OutputFormat "NUnitXML" -CodeCoverage $CodeCoverageFunctions -CodeCoverageOutputFile 'Test-HelpDeskCoverage.xml' -CodeCoverageOutputFileFormat JaCoCo
+      Invoke-Pester -Script $TestsPath `
+                    -OutputFile "./Test-HelpDeskPester.XML" `
+                    -OutputFormat "NUnitXML" `
+                    -CodeCoverage $CodeCoverageFunctions `
+                    -CodeCoverageOutputFile 'Test-HelpDeskCoverage.xml' `
+                    -CodeCoverageOutputFileFormat Cobertura
       
