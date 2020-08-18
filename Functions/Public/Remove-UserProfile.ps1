@@ -81,10 +81,13 @@ function Remove-UserProfile() {
                         Write-Progress -Activity "Deleting Profiles from Computer: $ComputerName"
                         $AllProfiles | ForEach-Object {
                             $Percent = [int]$(($Position / $Total) * 100)
-                            Write-Progress  -Activity "Removing profile for user: $(Split-Path $_.LocalPath -Leaf)" `
-                                            -Status "Removing profile $Position of $Total" `
-                                            -PercentComplete (($Position / $Total) * 100) `
-                                            -CurrentOperation "$Percent%"
+                            $Progress = @{
+                                Activity = "Removing profile for user: $(Split-Path $_.LocalPath -Leaf)"
+                                Status = "Removing profile $Position of $Total"
+                                PercentComplete = (($Position / $Total) * 100)
+                                CurrentOperation = "$Percent%"
+                            }
+                            Write-Progress @Progress
                             Remove-CimInstance -InputObject $_
                             $Position++
                         }
