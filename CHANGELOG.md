@@ -1,5 +1,9 @@
 # Changelog for HelpDesk
 
+## v1.0.3
++ FIX: Fixed parameter set definitions for Remove-UserProfile.
+  + Before, you could not use -All since -Username was mandatory, this has been corrected.
+
 ## v1.0.2
 + FIX: Issue #1- Fixed default -Domain value for the following
 + Get-LockedOutADUsers no longer gives output if there are no users locked out.
