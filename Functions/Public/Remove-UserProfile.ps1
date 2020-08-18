@@ -27,12 +27,18 @@
     Description
     -----------
     This will attempt to remove all named user accounts (comma-seperated) from the remote computer and display verbose output.
+.EXAMPLE
+    PS> Remove-UserProfile -ComputerName Some-Remote-PC1 -All -Except user1,specialuser,user4
+    
+    Description
+    -----------
+    This will remove all user profiles EXCEPT for the ones listed in the `-Except` parameter.
 .NOTES
     Author: Matthew J. DeGarmo
     Handle: @matthewjdegarmo
 #>
 function Remove-UserProfile() {
-    [CmdletBinding(DefaultParameterSetName='Named')]
+    [CmdletBinding(SupportsShouldProcess,ConfirmImpact='High',DefaultParameterSetName='Named')]
     Param (
         [Parameter(Mandatory,ParameterSetName='Named')]
         [System.String[]] $UserName,
@@ -41,11 +47,11 @@ function Remove-UserProfile() {
         [Parameter(ParameterSetName='All')]
         [System.String] $ComputerName,
 
-        [Parameter(ParameterSetName='All')]
+        [Parameter(Mandatory,ParameterSetName='All')]
         [Switch] $All,
 
-        [Switch] $WhatIf=$false,
-        [Switch] $Confirm=$false
+        [Parameter(ParameterSetName='All')]
+        [System.String[]] $Except
     )
 
     Begin {}
@@ -60,9 +66,29 @@ function Remove-UserProfile() {
                 } else {$ComputerName = $env:COMPUTERNAME}
 
                 $AllProfiles = Get-UserProfile @Params
+                if ($PSBoundParameters.ContainsKey('Except')) {
+                    $Except | ForEach-Object {
+                        $ExceptUser = $_
+                        Write-Output "Removing $ExceptUser from the deletion list. Will not delete user: $ExceptUser"
+                        $AllProfiles = $AllProfiles | Where-Object {$_.LocalPath -notlike "*$ExceptUser"}
+                    }
+                }
                 if ($null -ne $AllProfiles) {
-                    Write-Verbose "Removing all user profiles from computer: $ComputerName"
-                    $AllProfiles | Remove-CimInstance -Whatif:$Whatif -Confirm:$Confirm
+                    if ($PSCmdlet.ShouldProcess($AllProfiles, "Delete all profiles from this computer except for any exceptions listed.")){
+                        Write-Verbose "Removing all user profiles from computer: $ComputerName"
+                        $Total = $AllProfiles.Count
+                        $Position = 0
+                        Write-Progress -Activity "Deleting Profiles from Computer: $ComputerName"
+                        $AllProfiles | ForEach-Object {
+                            $Percent = [int]$(($Position / $Total) * 100)
+                            Write-Progress  -Activity "Removing profile for user: $(Split-Path $_.LocalPath -Leaf)" `
+                                            -Status "Removing profile $Position of $Total" `
+                                            -PercentComplete (($Position / $Total) * 100) `
+                                            -CurrentOperation "$Percent%"
+                            Remove-CimInstance -InputObject $_
+                            $Position++
+                        }
+                    }
                 } else {
                     Write-Error "There are no user profiles to remove with the specified criteria. Username: $User Computername: $ComputerName"
                 }
