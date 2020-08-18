@@ -34,8 +34,7 @@
 function Remove-UserProfile() {
     [CmdletBinding(DefaultParameterSetName='Named')]
     Param (
-        [Parameter(Mandatory)]
-        [Parameter(ParameterSetName='Named')]
+        [Parameter(Mandatory,ParameterSetName='Named')]
         [System.String[]] $UserName,
 
         [Parameter(ParameterSetName='Named')]
