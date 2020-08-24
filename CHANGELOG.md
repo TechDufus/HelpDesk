@@ -1,5 +1,9 @@
 # Changelog for HelpDesk
 
+## v1.0.4
++ Fixing Comment-Based help.
+  + Needed a blank line after the #Region declaration or it broke the built-in help.
+
 ## v1.0.3
 + FIX: Fixed parameter set definitions for Remove-UserProfile.
   + Before, you could not use -All since -Username was mandatory, this has been corrected.
