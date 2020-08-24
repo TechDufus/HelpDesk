@@ -1,4 +1,5 @@
 #Region Get-ADGroupsManagedByUser
+
 <#
 .SYNOPSIS
     Generate a list of group names owned by a specified.

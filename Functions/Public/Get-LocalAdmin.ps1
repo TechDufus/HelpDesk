@@ -1,4 +1,5 @@
 #Region Get-LocalAdmin
+
 <#
 .SYNOPSIS
     Retrieves a list of users in the local Administrators group.

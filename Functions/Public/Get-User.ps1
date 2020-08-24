@@ -1,4 +1,5 @@
 #Region Get-User
+
 <#
 .SYNOPSIS
     This function performs a quick lookup of an ActiveDirectory user, group membership, and possible computers belonging to that user.

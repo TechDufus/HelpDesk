@@ -1,4 +1,5 @@
 #Region Watch-Connection
+
 <#
 .SYNOPSIS
     Loops through a test-connection and sends email when connection is made.

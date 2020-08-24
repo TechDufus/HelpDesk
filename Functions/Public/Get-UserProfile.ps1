@@ -1,4 +1,5 @@
 #Region Get-UserProfile
+
 <#
 .SYNOPSIS
     Quickly generate a list of user profiles for a computer.

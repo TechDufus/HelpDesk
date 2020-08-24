@@ -1,4 +1,5 @@
 #Region Get-UsersWithFirstName
+
 <#
 .SYNOPSIS
     This function performs a search of users in ActiveDirectory for a first name.

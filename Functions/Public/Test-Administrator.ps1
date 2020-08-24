@@ -1,4 +1,5 @@
 #Region Test-Administrator
+
 <#
 .SYNOPSIS
     Test to see if the current user / process is being run as an Administrator.

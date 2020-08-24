@@ -1,4 +1,5 @@
 #Region Get-UsersWithLastName
+
 <#
 .SYNOPSIS
     This function performs a search of users in ActiveDirectory for a last name.
