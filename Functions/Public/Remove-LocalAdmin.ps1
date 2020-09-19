@@ -45,9 +45,11 @@ function Remove-LocalAdmin() {
         try {
             $FullUsername = Get-UsernameDomainFormat $Username $Domain
             if ($PSBoundParameters.ContainsKey('ComputerName')) {
+                #Invoke-Command -ComputerName $ComputerName -ScriptBlock { Remove-LocalGroupMember -Group Administrators -Member $using:FullUsername }
                 Invoke-Command -ComputerName $ComputerName -ScriptBlock { net.exe Localgroup Administrators $using:FullUsername /delete }
             }
             else {
+                #Remove-LocalGroupMember -Group Administrators -Member $FullUsername
                 net.exe Localgroup Administrators $FullUsername /delete
             }
         }
