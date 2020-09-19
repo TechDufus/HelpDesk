@@ -52,12 +52,13 @@ Function Add-LocalAdmin {
         try {
             $FullUsername = Get-UsernameDomainFormat $Username $Domain
             if ($PSBoundParameters.ContainsKey('ComputerName')) {
-                Invoke-Command -ComputerName $ComputerName -ScriptBlock { net.exe Localgroup Administrators $using:FullUsername /add }
+                Invoke-Command -ComputerName $ComputerName -ScriptBlock { Add-LocalGroupMember -Group 'Administrators' -Member $using:FullUsername }
+                #Invoke-Command -ComputerName $ComputerName -ScriptBlock { net.exe Localgroup Administrators $using:FullUsername /add }
             }
             else {
-                net.exe Localgroup Administrators $FullUsername /add
+                Add-LocalGroupMember -Group 'Administrators' -Member $FullUsername
+                #net.exe Localgroup Administrators $FullUsername /add
             }
-            
         }
         catch {
             Write-Error "$($_.Exception.Message)"
