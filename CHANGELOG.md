@@ -1,5 +1,8 @@
 # Changelog for HelpDesk
 
+## v1.0.5
++ Misc. code improvements.
+
 ## v1.0.4
 + Fixing Comment-Based help.
   + Needed a blank line after the #Region declaration or it broke the built-in help.
