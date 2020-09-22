@@ -36,6 +36,12 @@ Describe "HelpDesk Module Public Tests" {
                 It "Should have NOTES section in help" {
                     $CurrentFunction.FullName | Should -FileContentMatch '.NOTES'
                 }
+                It "Should have .PARAMETER help for each defined parameter" {
+                    $Params = ((Get-Command $CurrentFunction.BaseName).Parameters).Keys | Where-Object { $_ -notin ([System.Management.Automation.PSCmdlet]::CommonParameters) }
+                    $Params | Foreach-Object {
+                        $CurrentFunction.FullName | Should -FileContentMatch ".PARAMETER $_"
+                    }
+                }
                 It "Should be an advanced function" {
                     $CurrentFunction.FullName | Should -FileContentMatch 'function'
                     $CurrentFunction.FullName | Should -FileContentMatch 'cmdletbinding'
