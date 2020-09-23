@@ -105,6 +105,10 @@ InModuleScope HelpDesk {
                     $PSDefaultParameterValues = @{
                         "It:TestCases" = @{ CurrentFunction = $_ }
                     }
+                    It "Should have Begin and End Regions" {
+                        $CurrentFunction.FullName | Should -FileContentMatch "#Region"
+                        $CurrentFunction.FullName | Should -FileContentMatch "#EndRegion"
+                    }
                     It "Should be an advanced function" {
                         $CurrentFunction.FullName | Should -FileContentMatch 'function'
                         $CurrentFunction.FullName | Should -FileContentMatch 'cmdletbinding'
