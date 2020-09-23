@@ -5,7 +5,7 @@
     Starts Microsoft Remote Assistance
 .DESCRIPTION
     This function is set to work with the helpdesk mode of Windows Remote Assistance. You can either enter a computer name and the function will attempt to start a connection to the remote computer. If no computer name is specified Windows Remote Assistance will open to the Advanced Help Desk Mode, which is where you can enter a computer name to connect to.
-.PARAMETER  ComputerName
+.PARAMETER ComputerName
     This parameter is for the remote computer you wish to connect to. By default if you don’t specify a remote computer Windows Remote Assistant will open up to the helpdesk screen.
 .EXAMPLE
     PS C:\> Start-MSRA computer1

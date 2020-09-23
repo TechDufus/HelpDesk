@@ -7,6 +7,9 @@
 .DESCRIPTION
     Enables a specified Active Directory Account
 
+.PARAMETER Username
+    Specify the SAMAccountName or DistinguishedName of the user to enable.
+
 .EXAMPLE
     PS> Enable-ADAccount -Username JohnD
 

@@ -5,6 +5,8 @@
     Test to see if the current user / process is being run as an Administrator.
 .DESCRIPTION
     Test if the credentials running this function are elevated on the local system.
+.PARAMETER User
+    Specify the windows identity to test. This defaults to the current signed-in user running the command.
 .EXAMPLE
     PS> Test-Administrator
 
@@ -20,7 +22,7 @@
 function Test-Administrator {
     [CmdletBinding()]
     param (
-        $user = [Security.Principal.WindowsIdentity]::GetCurrent()
+        $User = [Security.Principal.WindowsIdentity]::GetCurrent()
     )
     (New-Object Security.Principal.WindowsPrincipal $user).IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)
 }

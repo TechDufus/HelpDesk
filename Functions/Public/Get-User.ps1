@@ -9,7 +9,7 @@
     This parameter should specify the ActiveDirectory account name or SamAccountName.
 .PARAMETER Groups
     This is a switch that will have the function include a listing of user group membership.
-.PARAMETER PossibleComputer
+.PARAMETER Computers
     Specifying this switch will check the desired user's last name (SurName) against all AD Computer Descriptions for a possible match.
     If your organization used the ManagedBy value to tie an AD Computer to an AD User, then you can change the script. I will look into how to do both in the future.
 .INPUTS
@@ -93,7 +93,7 @@ Function Get-User() {
                 Write-Verbose "Checking for Username: $Username details."
                 $AllUserInfo = Get-ADUser -Identity $Username -Properties "DisplayName", "Department", "Title", "Office", "Mail", "OfficePhone", "IPPhone", "Manager", "Description", "EmployeeID", "pwdLastSet" -ErrorAction Stop
                 $User = $AllUserInfo | `
-                        Select-Object DisplayName, @{Name = 'Manager'; Expression = { $(Get-ADUser $_.Manager).Name } }, Department, Title, Office, Mail, OfficePhone, IPPhone, EmployeeID, SamAccountName, Description, @{Name = 'PassLastSet'; Expression = { [DateTime]::FromFileTime($_.pwdLastSet) } }
+                    Select-Object DisplayName, @{Name = 'Manager'; Expression = { $(Get-ADUser $_.Manager).Name } }, Department, Title, Office, Mail, OfficePhone, IPPhone, EmployeeID, SamAccountName, Description, @{Name = 'PassLastSet'; Expression = { [DateTime]::FromFileTime($_.pwdLastSet) } }
             }
             catch {
                 Write-Verbose "Failed to lookup User attributes"
@@ -112,14 +112,15 @@ Function Get-User() {
 
                 if ($Computers.IsPresent) {
                     $UserDistinguishedName = $AllUserInfo.DistinguishedName
-                    $ComputerManagedBy = Get-ADComputer -Filter {ManagedBy -eq $UserDistinguishedName}
+                    $ComputerManagedBy = Get-ADComputer -Filter { ManagedBy -eq $UserDistinguishedName }
                     if ($ComputerManagedBy) {
                         Write-Verbose "Found possible computers. Displaying results."
                         Write-Output "Possible Computers..."
                         $ComputerManagedBy.Name | ForEach-Object {
                             Get-ADComputer -Identity $_ -Properties Description -ErrorAction Stop | Select-Object Name, Description
                         }
-                    } else { 
+                    }
+                    else { 
                         $Surname = "*$((Get-ADUser -Identity $Username -Properties SurName).SurName)*"
                         Write-Verbose "Checking for possible computers based on last name: $Surname"
                         try {

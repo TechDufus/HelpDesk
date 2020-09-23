@@ -7,9 +7,14 @@
 .DESCRIPTION
     This function removes a local admin from the computer or server it is run from.
 
-.NOTES
-    Azure AD Joined machines will require the user to first login to a computer with their domain account before adding their domain account as a local admin.
-    The user logging in registers their SID so that the command is successful.
+.PARAMETER Username
+    Specify the SAMAccountName of the user to remove.
+
+.PARAMETER ComputerName
+    Specify a remote computer to run against.
+
+.PARAMETER Domain
+    Specify the domain that the user belongs to.
 
 .EXAMPLE
     PS> Remove-LocalAdmin -Username someuser
@@ -21,6 +26,9 @@
 .NOTES
     Author: Matthew J. DeGarmo
     GitHub: https://github.com/matthewjdegarmo
+
+    Azure AD Joined machines will require the user to first login to a computer with their domain account before adding their domain account as a local admin.
+    The user logging in registers their SID so that the command is successful.
 #>
 function Remove-LocalAdmin() {
     [CmdletBinding()]

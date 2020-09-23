@@ -8,6 +8,8 @@
 .OUTPUTS
     None
         This function does not produce output except for write-output data
+.PARAMETER SAMAccountName
+    Specify the SAMAccountName or username of the AD User you want to unlock.
 .EXAMPLE
     PS>Unlock-LockedOutADUsers -SAMAccountName matthewjd
     Unlocking: matthewjd

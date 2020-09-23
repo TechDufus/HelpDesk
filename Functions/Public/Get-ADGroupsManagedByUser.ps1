@@ -5,7 +5,7 @@
     Generate a list of group names owned by a specified.
 .DESCRIPTION
     This will look up groups owned by the specified user.
-.PARAMETER Identity
+.PARAMETER Username
     This is the Identity used by `Get-ADUser` to look up the Distinguished name used by `Get-ADGroup`.
 .EXAMPLE
     PS>Get-ADGroupsManagedByUser mjdegar
@@ -22,15 +22,16 @@
 function Get-ADGroupsManagedByUser() {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory,Position=0)]
+        [Parameter(Mandatory, Position = 0)]
         [string] $Username
     )
     try {
         $User_DN = (Get-ADUser -Identity $Username).DistinguishedName
         Get-ADGroup -Properties ManagedBy -Filter * | `
-        Where-Object {$_.ManagedBy -eq $User_DN} | `
-        Select-Object Name
-    } catch {
+            Where-Object { $_.ManagedBy -eq $User_DN } | `
+            Select-Object Name
+    }
+    catch {
         Write-Error "$($_.Exception.Message) - Line Number: $($_.InvocationInfo.ScriptLineNumber)"
     }
 }

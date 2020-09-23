@@ -7,6 +7,9 @@
 .DESCRIPTION
     This function identifies local admins from the computer or server it is run from.
 
+.PARAMETER ComputerName
+    Specify the remote computer to query.
+
 .EXAMPLE
     PS> Get-LocalAdmin
 

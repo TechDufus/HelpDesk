@@ -9,6 +9,10 @@
     Specify the specific username(s) for the profile(s) to be deleted.
 .PARAMETER ComputerName
     Specify a remote computer name to remove user profiles from.
+.PARAMETER All
+    This switch will query all non-special profiles for deletion.
+.PARAMETER Except
+    This switch is used to exclude profiles when specifying the `-All` switch.
 .EXAMPLE
     PS> Remove-UserProfile test123
     Description

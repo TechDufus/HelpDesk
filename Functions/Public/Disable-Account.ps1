@@ -6,7 +6,10 @@
     
 .DESCRIPTION
     Disables a specified Active Directory Account
-    
+
+.PARAMETER Username
+    Specify the SAMAccountName or DistinguishedName of the user to disable.
+
 .EXAMPLE
     PS> Disable-ADAccount -Username JohnDoe
     

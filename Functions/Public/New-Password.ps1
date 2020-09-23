@@ -18,6 +18,12 @@
 .PARAMETER Count
     Number of passwords to generate, default = 1
 
+.PARAMETER CharSets
+    Specify the character-type requirements. U=Upper, L=Lower, N=Number, S=Special.
+
+.PARAMETER Exclude
+    Specify any characters to exclude from the new password generated.
+
 .EXAMPLE
     PS> New-RandomPassword -Admin
 
