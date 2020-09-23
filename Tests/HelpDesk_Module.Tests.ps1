@@ -104,7 +104,7 @@ InModuleScope HelpDesk {
             }
             
             Get-ChildItem ([System.IO.Path]::Combine($PSScriptRoot, '..', 'Functions', 'Private', '*.ps1')) -Exclude *tests.ps1, Aliases.ps1 | ForEach-Object {
-                Context "Test File: $($_.BaseName)" {
+                Context "Test Function: $($_.BaseName)" {
                     $PSDefaultParameterValues = @{
                         "It:TestCases" = @{ CurrentFunction = $_ }
                     }
