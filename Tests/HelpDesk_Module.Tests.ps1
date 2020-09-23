@@ -1,6 +1,6 @@
 #Requires -Modules @{ModuleName="Pester";ModuleVersion="5.0.0"}
 
-Import-Module ([System.IO.Path]::Combine($PSScriptRoot,'..','HelpDesk.psd1')) -Force
+Import-Module ([System.IO.Path]::Combine($PSScriptRoot, '..', 'HelpDesk.psd1')) -Force
 Describe "HelpDesk Module Public Tests" {
     It "Imports Successfully" {
         Get-Module HelpDesk | Should -Not -BeNullOrEmpty
@@ -8,14 +8,14 @@ Describe "HelpDesk Module Public Tests" {
     Context 'Public Functions' {
         It 'should import successfully' {
             $PublicImportedCommands = (Get-Command -Module HelpDesk).Name
-            $PublicFiles = Get-ChildItem ([System.IO.Path]::Combine($PSScriptRoot,'..','Functions','Public','*.ps1')) -Exclude *tests.ps1, Aliases.ps1 | ForEach-Object {
-                                $_
-                            }
+            $PublicFiles = Get-ChildItem ([System.IO.Path]::Combine($PSScriptRoot, '..', 'Functions', 'Public', '*.ps1')) -Exclude *tests.ps1, Aliases.ps1 | ForEach-Object {
+                $_
+            }
             $PublicImportFailedFunctions = (Compare-Object $PublicImportedCommands $($PublicFiles).BaseName).InputObject
             $PublicImportFailedFunctions | Should -BeNullOrEmpty
         }
 
-        Get-ChildItem ([System.IO.Path]::Combine($PSScriptRoot,'..','Functions','Public','*.ps1')) -Exclude *tests.ps1, Aliases.ps1 | ForEach-Object {
+        Get-ChildItem ([System.IO.Path]::Combine($PSScriptRoot, '..', 'Functions', 'Public', '*.ps1')) -Exclude *tests.ps1, Aliases.ps1 | ForEach-Object {
             Context "Test File: $($_.BaseName)" {
                 $PSDefaultParameterValues = @{
                     "It:TestCases" = @{ CurrentFunction = $_ }
@@ -37,7 +37,7 @@ Describe "HelpDesk Module Public Tests" {
                     $CurrentFunction.FullName | Should -FileContentMatch '.NOTES'
                 }
                 It "Should have .PARAMETER help for each defined parameter" {
-                    $Params = ((Get-Command $CurrentFunction.BaseName).Parameters).Keys | Where-Object { $_ -notin ([System.Management.Automation.PSCmdlet]::CommonParameters) }
+                    $Params = ((Get-Command $CurrentFunction.BaseName).Parameters).Keys | Where-Object { $_ -notin ([System.Management.Automation.PSCmdlet]::CommonParameters) -and $_ -notin ([System.Management.Automation.PSCmdlet]::OptionalCommonParameters) }
                     $Params | Foreach-Object {
                         $CurrentFunction.FullName | Should -FileContentMatch ".PARAMETER $_"
                     }
@@ -62,11 +62,12 @@ Describe "HelpDesk Module Public Tests" {
     }
     Context 'Aliases' {
         It 'should import successfully' {
-            $AliasesPath = [System.IO.Path]::Combine($PSScriptRoot,'..','Functions','Public','Aliases.ps1')
+            $AliasesPath = [System.IO.Path]::Combine($PSScriptRoot, '..', 'Functions', 'Public', 'Aliases.ps1')
             if (Test-Path $AliasesPath) {
                 $ModuleAliases = (Get-Content $AliasesPath | Select-String "Set-Alias").Count
                 $ActualAliases = (Get-Command -Module HelpDesk -CommandType Alias).Count
-            } else {
+            }
+            else {
                 $ModuleAliases = 0
                 $ActualAliases = 0
             }
@@ -75,12 +76,12 @@ Describe "HelpDesk Module Public Tests" {
     }
     Context 'Files' {
         It 'LICENSE should exist' {
-            $LicenseFile = [System.IO.Path]::Combine($PSScriptRoot,'..','LICENSE')
+            $LicenseFile = [System.IO.Path]::Combine($PSScriptRoot, '..', 'LICENSE')
             $isLicense = Get-ChildItem $LicenseFile
             $isLicense | Should -Be $true
         }
         It 'CHANGELOG.md should exist' {
-            $ChangelogFile = [System.IO.Path]::Combine($PSScriptRoot,'..','CHANGELOG.md')
+            $ChangelogFile = [System.IO.Path]::Combine($PSScriptRoot, '..', 'CHANGELOG.md')
             $isChangelog = Get-ChildItem $ChangelogFile
             $isChangelog | Should -Be $true
         }
@@ -92,14 +93,14 @@ InModuleScope HelpDesk {
         Context 'Private Functions' {
             It 'should import successfully' {
                 $PrivateImportedCommands = (Get-Command -Module HelpDesk).Name
-                $PrivateFiles = Get-ChildItem ([System.IO.Path]::Combine($PSScriptRoot,'..','Functions','Private','*.ps1')) -Exclude *tests.ps1, Aliases.ps1 | ForEach-Object {
-                                    $_
-                                }
+                $PrivateFiles = Get-ChildItem ([System.IO.Path]::Combine($PSScriptRoot, '..', 'Functions', 'Private', '*.ps1')) -Exclude *tests.ps1, Aliases.ps1 | ForEach-Object {
+                    $_
+                }
                 $PrivateImportSuccessfulFunctions = Compare-Object $PrivateImportedCommands $PrivateFiles.BaseName -IncludeEqual -ExcludeDifferent
                 $PrivateImportSuccessfulFunctions.InputObject | Should -Be $PrivateFiles.BaseName
             }
             
-            Get-ChildItem ([System.IO.Path]::Combine($PSScriptRoot,'..','Functions','Private','*.ps1')) -Exclude *tests.ps1, Aliases.ps1 | ForEach-Object {
+            Get-ChildItem ([System.IO.Path]::Combine($PSScriptRoot, '..', 'Functions', 'Private', '*.ps1')) -Exclude *tests.ps1, Aliases.ps1 | ForEach-Object {
                 Context "Test File: $($_.BaseName)" {
                     $PSDefaultParameterValues = @{
                         "It:TestCases" = @{ CurrentFunction = $_ }
