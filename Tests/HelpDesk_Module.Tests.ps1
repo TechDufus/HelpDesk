@@ -1,5 +1,5 @@
 #Requires -Modules @{ModuleName="Pester";ModuleVersion="5.0.0"}
-
+Remove-Module HelpDesk
 Import-Module ([System.IO.Path]::Combine($PSScriptRoot, '..', 'HelpDesk.psd1')) -Force
 Describe "HelpDesk Module Public Tests" {
     It "Imports Successfully" {
