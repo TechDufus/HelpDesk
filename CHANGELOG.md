@@ -1,8 +1,7 @@
 # Changelog for HelpDesk
 
-## v1.0.6
-+ Adding GitHub Project links to the .NOTES section of every public function.
 ## v1.0.5
++ Adding GitHub Project links to the .NOTES section of every public function.
 + Misc. code improvements.
 
 ## v1.0.4
