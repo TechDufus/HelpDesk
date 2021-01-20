@@ -16,8 +16,10 @@
 .NOTES
     Author: Matthew J. DeGarmo
     Handle: @matthewjdegarmo
-.LINK
-    https://zero.comaround.com/link/19fc2b232c2a4cc149c508d821a4d624/
+
+    You can either submit a [PR](https://github.com/matthewjdegarmo/HelpDesk/pulls)
+        or create an [Issue](https://github.com/matthewjdegarmo/HelpDesk/issues/new)
+        on this GitHub project at https://github.com/matthewjdegarmo/HelpDesk
 #>
 function Test-Administrator {
     [CmdletBinding()]
