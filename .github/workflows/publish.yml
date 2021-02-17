@@ -1,8 +1,6 @@
 name: "Version Check + Publish to PSGallery"
-on:
-  push:
-    branches:
-      - "main"
+on: "push"
+
 
 jobs:
   run:
