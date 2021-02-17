@@ -217,7 +217,8 @@ Begin {
         [CmdletBinding()]
         Param(
             $ModuleName = $script:ModuleName,
-            $Repository = 'PSGallery'
+            $Repository = 'PSGallery',
+            $PSGalleryApiKey = $PSGalleryApiKey
         )
 
         Process {
@@ -226,7 +227,7 @@ Begin {
             $publishModuleSplat = @{
                 Path = $BuiltModulePath
                 Repository = 'PSGallery'
-                NuGetApiKey = $env:PSGALLERY_API_KEY #This references Azure Secret imported by Azure task.
+                NuGetApiKey = $PSGalleryApiKey #This references Azure Secret imported by Azure task.
             }
             Publish-Module @publishModuleSplat
         }
