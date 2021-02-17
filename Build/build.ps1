@@ -5,7 +5,10 @@ Param(
 
     [Switch] $DoNotPublish,
 
-    [Switch] $DoNotCleanUp
+    [Switch] $DoNotCleanUp,
+
+    [Parameter(Mandatory)]
+    [System.String] $PSGalleryApiKey
 )
 
 Begin {
@@ -306,18 +309,17 @@ Begin {
             $RepositoryRoot = Split-Path (Split-Path $script:MyRoot -Parent) -Parent
             $TestXMLFiles = Get-ChildItem (Join-Path $RepositoryRoot '*-Build_testResults.xml')
             If ($TestXMLFiles) {
-                Write-Status Info "Cleaning up leftover .XML test files."
                 $TestXMLFiles | Remove-Item -Force
             }
         }
     }
     #EndRegion Remove-TestResultFiles
-
+    
     #Region Environment
     Write-Status Info 'Setting up environment...'
     $script:MyRoot = Split-Path $PSScriptRoot -Parent
     $PesterIsInstalled = Get-Module Pester -ListAvailable
-
+    
     If (-Not($PesterIsInstalled)) {
         Write-Status Warning "DEPENDENCY: Installing Pester Module."
         Install-Module Pester -MinimumVersion 5.0.0 -Scope CurrentUser -Force
@@ -347,6 +349,7 @@ Process {
             If (-Not($DoNotCleanUp.IsPresent)) {
                 Write-Status Info "Cleaning up Module Build files."
                 Remove-ModuleBuild
+                Write-Status Info "Cleaning up leftover .XML test files."
                 Remove-TestResultFiles
             }
         } Else {
