@@ -9,5 +9,5 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@master
-      - run: ./build/build.ps1 -DoNotPublish
+      - run: ./Build/build.ps1 -DoNotPublish
         shell: pwsh
