@@ -7,5 +7,7 @@ jobs:
     name: Version Check and Publish
     runs-on: ubuntu-latest
     steps:
-      - run: ./build/build.ps1 -DoNotPublish
+      - name: Checkout repository
+        uses: actions/checkout@master
+      - run: $ {{ GITHUB_WORKSPACE }}/build/build.ps1 -DoNotPublish
         shell: pwsh
