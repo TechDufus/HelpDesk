@@ -34,7 +34,7 @@
     Azure AD Joined machines will require the user to first login to a computer with their domain account before adding their domain account as a local admin.
     The user logging in registers their SID so that the command is successful.
 #>
-function Remove-LocalAdmin() {
+Function Remove-LocalAdmin() {
     [CmdletBinding()]
     Param (
         [Parameter(Mandatory, Position = 0)]

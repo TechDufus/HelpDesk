@@ -8,7 +8,7 @@
     Author: Matthew J. DeGarmo
     GitHub: https://github.com/matthewjdegarmo
 #>
-function Get-PlainText() {
+Function Get-PlainText() {
     [CmdletBinding()]
     param
     (

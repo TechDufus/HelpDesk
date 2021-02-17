@@ -21,7 +21,7 @@
         or create an [Issue](https://github.com/matthewjdegarmo/HelpDesk/issues/new)
         on this GitHub project at https://github.com/matthewjdegarmo/HelpDesk
 #>
-function Test-Administrator {
+Function Test-Administrator() {
     [CmdletBinding()]
     param (
         $User = [Security.Principal.WindowsIdentity]::GetCurrent()

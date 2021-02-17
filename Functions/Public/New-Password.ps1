@@ -45,7 +45,7 @@
         or create an [Issue](https://github.com/matthewjdegarmo/HelpDesk/issues/new)
         on this GitHub project at https://github.com/matthewjdegarmo/HelpDesk
 #>
-Function New-Password () {
+Function New-Password() {
     [CmdletBinding()]
     param (
         [Int]$Size = 12,

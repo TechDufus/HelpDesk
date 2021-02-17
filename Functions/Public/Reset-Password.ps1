@@ -35,7 +35,7 @@
         or create an [Issue](https://github.com/matthewjdegarmo/HelpDesk/issues/new)
         on this GitHub project at https://github.com/matthewjdegarmo/HelpDesk
 #>
-function Reset-Password() {
+Function Reset-Password() {
     [CmdletBinding()]
     Param (
         [Parameter(Mandatory = $true)]

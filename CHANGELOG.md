@@ -1,5 +1,12 @@
 # Changelog for HelpDesk
 
+## v1.0.6
++ Syntax changes in function definitions
+  + This does not contain any features or major code changes.
++ New build process
+  + Testing, Building, and Publishing this module not exist exclusively within GitHub (from Azure DevOps)
+  + This change is to remain in the GitHub ecosystem and have a singular location to handle maintinance.
+
 ## v1.0.5
 + Adding GitHub Project links to the .NOTES section of every public function.
 + Misc. code improvements.

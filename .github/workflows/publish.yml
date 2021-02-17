@@ -1,6 +1,5 @@
-name: "Version Check + Publish to PSGallery"
+name: "Build and Publish"
 on: "push"
-
 
 jobs:
   run:

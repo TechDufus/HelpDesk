@@ -51,7 +51,7 @@
         or create an [Issue](https://github.com/matthewjdegarmo/HelpDesk/issues/new)
         on this GitHub project at https://github.com/matthewjdegarmo/HelpDesk
 #>
-function Get-DellTags() {
+Function Get-DellTags() {
     [cmdletBinding(DefaultParameterSetName='ComputerName')]
     param (
         [Parameter(Mandatory,Position=0,ValueFromPipeline,ValueFromPipelineByPropertyName,ParameterSetName="ServiceTag")]

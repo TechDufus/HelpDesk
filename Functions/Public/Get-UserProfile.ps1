@@ -27,7 +27,7 @@
         or create an [Issue](https://github.com/matthewjdegarmo/HelpDesk/issues/new)
         on this GitHub project at https://github.com/matthewjdegarmo/HelpDesk
 #>
-function Get-UserProfile() {
+Function Get-UserProfile() {
     [CmdletBinding()]
     Param (
         [System.String] $ComputerName

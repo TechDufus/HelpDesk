@@ -33,7 +33,7 @@
         on this GitHub project at https://github.com/matthewjdegarmo/HelpDesk
 #>
 #Requires -Assembly C:\Windows\system32\net.exe
-function Get-LocalAdmin() {
+Function Get-LocalAdmin() {
     [CmdletBinding()]
     param(
         [Parameter()]

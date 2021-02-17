@@ -39,7 +39,7 @@
         or create an [Issue](https://github.com/matthewjdegarmo/HelpDesk/issues/new)
         on this GitHub project at https://github.com/matthewjdegarmo/HelpDesk
 #>
-Function Disable-Account {
+Function Disable-Account() {
     [CmdletBinding()]
     Param (
         [Parameter(Mandatory = $true)]$Username

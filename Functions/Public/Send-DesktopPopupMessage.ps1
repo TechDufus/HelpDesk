@@ -36,7 +36,7 @@
         or create an [Issue](https://github.com/matthewjdegarmo/HelpDesk/issues/new)
         on this GitHub project at https://github.com/matthewjdegarmo/HelpDesk
 #>
-function Send-DesktopPopupMessage() {
+Function Send-DesktopPopupMessage() {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true, Position = 0)]
