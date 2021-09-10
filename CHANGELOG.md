@@ -4,7 +4,7 @@
 + Syntax changes in function definitions
   + This does not contain any features or major code changes.
 + New build process
-  + Testing, Building, and Publishing this module not exist exclusively within GitHub (from Azure DevOps)
+  + Testing, Building, and Publishing this module now exist exclusively within GitHub (from Azure DevOps)
   + This change is to remain in the GitHub ecosystem and have a singular location to handle maintinance.
 
 ## v1.0.5
