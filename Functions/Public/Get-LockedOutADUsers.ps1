@@ -38,13 +38,49 @@
 #>
 Function Get-LockedOutADUsers() {
     [CmdletBinding()]
-    param ()
+    param(
+        [System.String[]] $Properties,
 
-    $Users = Search-ADAccount -LockedOut | Foreach-Object { Get-ADUser $_.SamAccountName -Properties LockoutTime | Where-Object { $_.Name -ne 'Guest' } | Select-Object Name, SAMAccountName, LockoutTime | Sort-Object LockoutTime }
-    foreach ($User in $Users) {
-        $Date = [DateTime]$User.LockoutTime
-        $User.LockoutTime = $Date.AddYears(1600).ToLocalTime()
+        [Switch] $IncludeLockoutSource
+    )
+
+    Begin {
+        If ($IncludeLockoutSource.IsPresent) {
+            $params = @{
+                LogName      = 'Security'
+                ComputerName = "$((Get-ADDomain).PDCEmulator)"
+                MaxEvents    = 1
+                ErrorAction  = 'Stop'
+            }
+            Try {
+                $TestLogAbility = Get-WinEvent @params | Select-Object -First 1
+            }
+            Catch {
+                $LogFailed = $True
+            }
+        }
     }
-    $Users
+
+    Process {
+        If ($Properties -ne '*') {
+            $Properties = @('Name', 'SAMAccountName', 'LockoutTime') + @($Properties) | Select-Object -Unique
+        }
+        Search-ADAccount -LockedOut | Foreach-Object { Get-ADUser $_.SamAccountName -Properties LockoutTime | Where-Object { $_.Name -ne 'Guest' } | Select-Object $Properties | Foreach-Object {
+                $Date = [DateTime]$_.LockoutTime
+                $_.LockoutTime = $Date.AddYears(1600).ToLocalTime()
+                If ($IncludeLockoutSource.IsPresent) {
+                    [PSCustomObject] @{
+                        Name           = $_.Name
+                        SAMAccountName = $_.SAMAccountName
+                        LockoutTime    = $_.LockoutTime
+                        LockOutSource  = $(Get-LockoutSource -Identity $_.SAMAccountName).LockoutSource
+                    }
+                }
+                else {
+                    $_
+                }
+            }
+        }
+    }
 }
 #EndRegion Get-LockedOutADUsers
