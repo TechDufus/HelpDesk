@@ -46,17 +46,17 @@ Function Get-LockedOutADUsers() {
 
     Begin {
         If ($IncludeLockoutSource.IsPresent) {
+            $script:ComputerName = "$((Get-ADDomain).PDCEmulator)"
             $params = @{
-                LogName      = 'Security'
-                ComputerName = "$((Get-ADDomain).PDCEmulator)"
-                MaxEvents    = 1
+                ComputerName = $ComputerName
                 ErrorAction  = 'Stop'
             }
             Try {
-                $TestLogAbility = Get-WinEvent @params | Select-Object -First 1
+                $null=Test-WSMan @params
             }
             Catch {
-                $LogFailed = $True
+                [Switch]$IncludeLockoutSource = $false
+                Write-Warning "You do not have rights to execute remote queries to this Domain Controller: $($script:ComputerName)"
             }
         }
     }
@@ -73,7 +73,7 @@ Function Get-LockedOutADUsers() {
                         Name           = $_.Name
                         SAMAccountName = $_.SAMAccountName
                         LockoutTime    = $_.LockoutTime
-                        LockOutSource  = $(Get-LockoutSource -Identity $_.SAMAccountName).LockoutSource
+                        LockOutSource  = $(Get-LockoutSource -Identity $_.SAMAccountName -ComputerName $script:ComputerName).LockoutSource
                     }
                 }
                 else {
