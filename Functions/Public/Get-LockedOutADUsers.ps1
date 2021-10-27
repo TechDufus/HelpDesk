@@ -65,15 +65,24 @@ Function Get-LockedOutADUsers() {
         If ($Properties -ne '*') {
             $Properties = @('Name', 'SAMAccountName', 'LockoutTime') + @($Properties) | Select-Object -Unique
         }
+        If ($IncludeLockoutSource.IsPresent) {
+            $LockoutEvents = @{}
+            Get-LockoutSource -ComputerName $script:ComputerName | Foreach-Object {
+                If (-Not($LockoutEvents[$_.SamAccountName])) {
+                    $LockoutEvents[$_.SamAccountName] = $_.LockoutSource
+                }
+            }
+        }
+
+
         Search-ADAccount -LockedOut | Foreach-Object { Get-ADUser $_.SamAccountName -Properties LockoutTime | Where-Object { $_.Name -ne 'Guest' } | Select-Object $Properties | Foreach-Object {
                 $Date = [DateTime]$_.LockoutTime
                 $_.LockoutTime = $Date.AddYears(1600).ToLocalTime()
                 If ($IncludeLockoutSource.IsPresent) {
-                    [PSCustomObject] @{
-                        Name           = $_.Name
-                        SAMAccountName = $_.SAMAccountName
-                        LockoutTime    = $_.LockoutTime
-                        LockOutSource  = $(Get-LockoutSource -Identity $_.SAMAccountName -ComputerName $script:ComputerName).LockoutSource
+                    If ($null -ne $LockoutEvents[$_.SamAccountName]) {
+                        $_ | Add-Member -MemberType NoteProperty -Name 'LockoutSource' -Value $LockoutEvents[$_.SamAccountName]
+                    } Else {
+                        $_ | Add-Member -MemberType NoteProperty -Name 'LockoutSource' -Value 'UNKNOWN'
                     }
                 }
                 else {
