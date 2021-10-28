@@ -5,6 +5,16 @@
     This function performs a search of users in ActiveDirectory who are currently locked out.
 .DESCRIPTION
     This function is a simple Search-ADAccount -Lockedout to generate a list of users who are currently locked out. This function provides the Name, SAMAccountName, and LockoutTime for each user that is locked out.
+.PARAMETER Properties
+    This parameter should specify any AD properties to be returned for each user.
+    This parameter is optional. If not specified, the default is to return the following properties:
+        - Name
+        - SAMAccountName
+        - LockoutTime
+        - [CONDITIONAL] LockoutSource (See Parameter -IncludeLockoutSource)
+.PARAMETER IncludeLockoutSource
+    This parameter is optional. If specified, the LockoutSource will be returned for each user.
+    This parameter requires you have rights to query your domain controller for these logs.
 .INPUTS
     System.String
         This function does not accept pipeline data. The values for all parameters must be specified.
@@ -46,17 +56,22 @@ Function Get-LockedOutADUsers() {
 
     Begin {
         If ($IncludeLockoutSource.IsPresent) {
-            $script:ComputerName = "$((Get-ADDomain).PDCEmulator)"
+            $ComputerName = "$((Get-ADDomain).PDCEmulator)"
             $params = @{
-                ComputerName = $ComputerName
-                ErrorAction  = 'Stop'
+                FilterHashTable = @{
+                    LogName = 'Security'
+                    ID      = '4740'
+                }
+                MaxEvents       = 1
+                ComputerName    = $ComputerName
+                ErrorAction     = 'Stop'
             }
             Try {
-                $null=Test-WSMan @params
+                $null = Get-WinEvent @params
             }
             Catch {
                 [Switch]$IncludeLockoutSource = $false
-                Write-Warning "You do not have rights to execute remote queries to this Domain Controller: $($script:ComputerName)"
+                Write-Warning "You do not have rights to execute remote queries to this Domain Controller: $ComputerName"
             }
         }
     }
@@ -67,9 +82,9 @@ Function Get-LockedOutADUsers() {
         }
         If ($IncludeLockoutSource.IsPresent) {
             $LockoutEvents = @{}
-            Get-LockoutSource -ComputerName $script:ComputerName | Foreach-Object {
-                If (-Not($LockoutEvents[$_.SamAccountName])) {
-                    $LockoutEvents[$_.SamAccountName] = $_.LockoutSource
+            Get-LockoutSource -ComputerName $ComputerName | Foreach-Object {
+                If (-Not([bool]$LockoutEvents["$($_.Identity)"])) {
+                    $LockoutEvents["$($_.Identity)"] = $_.LockoutSource
                 }
             }
         }
@@ -79,15 +94,14 @@ Function Get-LockedOutADUsers() {
                 $Date = [DateTime]$_.LockoutTime
                 $_.LockoutTime = $Date.AddYears(1600).ToLocalTime()
                 If ($IncludeLockoutSource.IsPresent) {
-                    If ($null -ne $LockoutEvents[$_.SamAccountName]) {
-                        $_ | Add-Member -MemberType NoteProperty -Name 'LockoutSource' -Value $LockoutEvents[$_.SamAccountName]
-                    } Else {
+                    If ([bool]$LockoutEvents["$($_.SamAccountName)"]) {
+                        $_ | Add-Member -MemberType NoteProperty -Name 'LockoutSource' -Value $LockoutEvents["$($_.SamAccountName)"]
+                    }
+                    Else {
                         $_ | Add-Member -MemberType NoteProperty -Name 'LockoutSource' -Value 'UNKNOWN'
                     }
                 }
-                else {
-                    $_
-                }
+                $_
             }
         }
     }
