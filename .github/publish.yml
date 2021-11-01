@@ -1,7 +1,7 @@
 name: "Build and Publish"
 on:
-  pull_request:
-    branches:
+  push:
+    branches: 
       - master
 
 jobs:
@@ -12,6 +12,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@master
       - run: >
-          ./Build/build.ps1
+          ./Build/full-release-pipeline.ps1
           -PSGalleryApiKey ${{ secrets.PSGALLERY_API_KEY }}
         shell: pwsh

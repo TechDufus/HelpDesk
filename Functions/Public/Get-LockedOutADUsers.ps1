@@ -5,6 +5,26 @@
     This function performs a search of users in ActiveDirectory who are currently locked out.
 .DESCRIPTION
     This function is a simple Search-ADAccount -Lockedout to generate a list of users who are currently locked out. This function provides the Name, SAMAccountName, and LockoutTime for each user that is locked out.
+.PARAMETER Properties
+    This parameter should specify any AD properties to be returned for each user.
+    This parameter is optional. If not specified, the default is to return the following properties:
+        - Name
+        - SAMAccountName
+        - LockoutTime
+        - [CONDITIONAL] LockoutSource (See Parameter -IncludeLockoutSource)
+.PARAMETER IncludeLockoutSource
+    This parameter is optional. If specified, the LockoutSource will be returned for each user. This parameter requires you have rights to query your domain controller for these logs.
+    Specifying this parameter will first make a test query to your domain controller to confirm you have rights to query these logs.
+    If you do not have rights to query these logs, this parameter will be ignored.
+
+    So far, the SIMPLEST way to grant a domain user rights to read these logs from the correct Domain Controller (that I know of) involves the following:
+        - Add the user (or group) to the 'Event Log Readers' group on the domain controller.
+        - Grant the user (or group) READ rights to the registry key HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Eventlog\Security on the domain controller.
+    Both of the above are required to have rights to the DC's Security logs. Membership to the 'Event Log Readers' group only will NOT grant read rights to the Security logs.
+    See: https://social.technet.microsoft.com/Forums/lync/en-US/b72162d1-2c86-4d1a-9727-ec7269814cc4/getwinevent-with-nonadministrative-user?forum=winserverpowershell
+
+    This will grant the user (or group) rights to read the Event Logs on the domain controller, including the Security logs. This is the only registry key that is required to read the Security Event Logs.
+    If you do not have these rights, you will not be able to read the Lockout (4740) logs.
 .INPUTS
     System.String
         This function does not accept pipeline data. The values for all parameters must be specified.
@@ -28,6 +48,15 @@
     Description
     -----------
     This will display the results of the query, in this case there were no results to display.
+.EXAMPLE
+    PS>GLO -IncludeLockoutSource
+    Name                SamAccountName LockoutTime        LockoutSource
+    ----                -------------- -----------        -------------
+    DeGarmo, Matthew J. matthewjd      6/26/2019 13:32:15 Some-Computer
+
+    Description
+    -----------
+    This will show all users who are currently locked out and the source computername of the lockout event.
 .NOTES
     Author: Matthew J. DeGarmo
     GitHub: https://github.com/matthewjdegarmo
@@ -38,13 +67,63 @@
 #>
 Function Get-LockedOutADUsers() {
     [CmdletBinding()]
-    param ()
+    param(
+        [Switch] $IncludeLockoutSource,
+        
+        [System.String[]] $Properties
 
-    $Users = Search-ADAccount -LockedOut | Foreach-Object { Get-ADUser $_.SamAccountName -Properties LockoutTime | Where-Object { $_.Name -ne 'Guest' } | Select-Object Name, SAMAccountName, LockoutTime | Sort-Object LockoutTime }
-    foreach ($User in $Users) {
-        $Date = [DateTime]$User.LockoutTime
-        $User.LockoutTime = $Date.AddYears(1600).ToLocalTime()
+    )
+
+    Begin {
+        If ($IncludeLockoutSource.IsPresent) {
+            $ComputerName = "$((Get-ADDomain).PDCEmulator)"
+            $params = @{
+                FilterHashTable = @{
+                    LogName = 'Security'
+                    ID      = '4740'
+                }
+                MaxEvents       = 1
+                ComputerName    = $ComputerName
+                ErrorAction     = 'Stop'
+            }
+            Try {
+                $null = Get-WinEvent @params
+            }
+            Catch {
+                [Switch]$IncludeLockoutSource = $false
+                Write-Warning "You do not have rights to execute remote queries to this Domain Controller: $ComputerName"
+            }
+        }
     }
-    $Users
+
+    Process {
+        If ($Properties -ne '*') {
+            $Properties = @('Name', 'SAMAccountName', 'LockoutTime') + @($Properties) | Select-Object -Unique
+        }
+        If ($IncludeLockoutSource.IsPresent) {
+            $LockoutEvents = @{}
+            Get-LockoutSource -ComputerName $ComputerName | Foreach-Object {
+                If (-Not([bool]$LockoutEvents["$($_.Identity)"])) {
+                    $LockoutEvents["$($_.Identity)"] = $_.LockoutSource
+                }
+            }
+        }
+
+
+        Search-ADAccount -LockedOut | Foreach-Object { Get-ADUser $_.SamAccountName -Properties LockoutTime | Where-Object { $_.Name -ne 'Guest' } | Select-Object $Properties | Foreach-Object {
+                $Date = [DateTime]$_.LockoutTime
+                $_.LockoutTime = $Date.AddYears(1600).ToLocalTime()
+                If ($IncludeLockoutSource.IsPresent) {
+                    If ([bool]$LockoutEvents["$($_.SamAccountName)"]) {
+                        $_ | Add-Member -MemberType NoteProperty -Name 'LockoutSource' -Value $LockoutEvents["$($_.SamAccountName)"]
+                    }
+                    Else {
+                        $_ | Add-Member -MemberType NoteProperty -Name 'LockoutSource' -Value 'UNKNOWN'
+                    }
+                }
+                $_
+            }
+        }
+    }
 }
 #EndRegion Get-LockedOutADUsers

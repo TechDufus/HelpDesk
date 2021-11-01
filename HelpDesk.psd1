@@ -12,7 +12,7 @@
 RootModule = 'HelpDesk.psm1'
 
 # Version number of this module.
-ModuleVersion = '1.0.6'
+ModuleVersion = '1.1.0'
 
 # Supported PSEditions
 CompatiblePSEditions = @('Desktop','Core')
@@ -74,7 +74,7 @@ FunctionsToExport = 'Unlock-AllADAccounts', 'Get-LockedOutADUsers',
                 'Watch-Connection', 'New-Password', 'Disable-Account', 'Enable-Account', 'Reset-Password', 
                 'Add-LocalAdmin', 'Remove-LocalAdmin', 'Get-LocalAdmin', 
                 'Get-DaysUntil', 'Get-User', 'Get-UsersWithFirstName', 'Get-UsersWithLastName', 
-                'Get-Computer', 'Get-ADGroupsManagedByUser', 'Get-DellTags', 'Get-UserProfile', 'Remove-UserProfile'
+                'Get-Computer', 'Get-ADGroupsManagedByUser', 'Get-DellTags', 'Get-UserProfile', 'Remove-UserProfile', 'Get-LockoutSource'
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()

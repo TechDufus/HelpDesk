@@ -1,5 +1,24 @@
 # Changelog for HelpDesk
 
+## v1.1.0
+
+`New Features!`:
++ `Get-LockedOutADUsers`: Aliased as `GLO`
+  + This function just got a big feature for those admins who have access.
+  + This function can now provide the source of the user lockout event.
+    + You must have rights to query your domain controller for Security Event Logs.
+      + See `Get-Help GLO -Parameter IncludeLockoutSource` for more information on read access to DC logs.
+  + See `Get-Help GLO -Parameter IncludeLockoutSource` for more information.
+  + With this, the following command will now be possible (if you have domain rights):
+
+```txt
+PS> GLO -IncludeLockoutSource
+
+Name                SamAccountName LockoutTime        LockoutSource
+----                -------------- -----------        -------------
+DeGarmo, Matthew J. matthewjd      6/26/2019 13:32:15 Some-Computer
+```
+
 ## v1.0.6
 + Syntax changes in function definitions
   + This does not contain any features or major code changes.
