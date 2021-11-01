@@ -1,0 +1,53 @@
+name: "Build and Test"
+on:
+  pull_request:
+
+jobs:
+  linux_build:
+    name: Build module on Linux
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@master
+      - run: ./Build/source-code-tests.ps1
+        name: "Pre_Test_On_Linux"
+        shell: pwsh
+      - run: ./Build/build.ps1
+        name: "Build_On_Linux"
+        shell: pwsh
+      - run: ./Build/post-build-tests.ps1
+        name: 'Post_Test_On_Linux'
+        shell: pwsh
+
+  windows_build:
+    name: Build module on Windows
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@master
+      - run: ./Build/source-code-tests.ps1
+        name: "Pre_Test_On_Windows"
+        shell: pwsh
+      - run: ./Build/build.ps1
+        name: "Build_On_Windows"
+        shell: pwsh
+      - run: ./Build/post-build-tests.ps1
+        name: 'Post_Test_On_Windows'
+        shell: pwsh
+
+  macos_build:
+    name: Build module on MacOS
+    runs-on: macos-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@master
+      - run: ./Build/source-code-tests.ps1
+        name: "Pre_Test_On_MacOS"
+        shell: pwsh
+      - run: ./Build/build.ps1
+        name: "Build_On_MacOS"
+        shell: pwsh
+      - run: ./Build/post-build-tests.ps1
+        name: 'Post_Test_On_MacOS'
+        shell: pwsh
+

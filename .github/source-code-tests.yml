@@ -1,0 +1,34 @@
+name: "Source-Code Tests"
+on:
+  push:
+
+jobs:
+  linux_tests:
+    name: Test source code module on Linux
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@master
+      - run: ./Build/source-code-tests.ps1
+        name: "Source_Test_On_Linux"
+        shell: pwsh
+
+  windows_tests:
+    name: Test source code module on Windows
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@master
+      - run: ./Build/source-code-tests.ps1
+        name: "Source_Test_On_Windows"
+        shell: pwsh
+
+  macos_tests:
+    name: Test source code module on MacOS
+    runs-on: macos-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@master
+      - run: ./Build/source-code-tests.ps1
+        name: "Source_Test_On_MacOS"
+        shell: pwsh
