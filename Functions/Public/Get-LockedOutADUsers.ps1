@@ -15,6 +15,8 @@
 .PARAMETER IncludeLockoutSource
     This parameter is optional. If specified, the LockoutSource will be returned for each user.
     This parameter requires you have rights to query your domain controller for these logs.
+    Specifying this parameter will first make a test query to your domain controller to confirm you have rights to query these logs.
+    If you do not have rights to query these logs, this parameter will be ignored.
 .INPUTS
     System.String
         This function does not accept pipeline data. The values for all parameters must be specified.
@@ -38,6 +40,15 @@
     Description
     -----------
     This will display the results of the query, in this case there were no results to display.
+.EXAMPLE
+    PS>GLO -IncludeLockoutSource
+    Name                SamAccountName LockoutTime        LockoutSource
+    ----                -------------- -----------        -------------
+    DeGarmo, Matthew J. matthewjd      6/26/2019 13:32:15 Some-Computer
+
+    Description
+    -----------
+    This will show all users who are currently locked out and the source computername of the lockout event.
 .NOTES
     Author: Matthew J. DeGarmo
     GitHub: https://github.com/matthewjdegarmo
