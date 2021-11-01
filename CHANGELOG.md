@@ -7,6 +7,7 @@
   + This function just got a big feature for those admins who have access.
   + This function can now provide the source of the user lockout event.
     + You must have rights to query your domain controller for Security Event Logs.
+      + See `Get-Help GLO -Parameter IncludeLockoutSource` for more information on read access to DC logs.
   + See `Get-Help GLO -Parameter IncludeLockoutSource` for more information.
   + With this, the following command will now be possible (if you have domain rights):
 

@@ -1,4 +1,37 @@
+#Region Get-LockoutSource
 
+<#
+.SYNOPSIS
+    Get the lockout (4740) parsed event log from your domain controller.
+.DESCRIPTION
+    This command will get the lockout (4740) event log from your domain controller.
+.PARAMETER Identity
+    The Identity of a specific AD User to query.
+.PARAMETER ComputerName
+    The name of the computer to query.
+    This defaults to the correct domain controller.
+.EXAMPLE
+    Get-LockoutSource -ComputerName DC1
+
+    Description
+    -----------
+    This will get the lockout (4740) events log from DC1 for any user.
+.EXAMPLE
+    Get-LockoutSource -Identity "Administrator" -ComputerName DC1
+
+    Description
+    -----------
+    This will get the lockout (4740) events log from DC1 for the Administrator user.
+.EXAMPLE
+    Get-LockoutSource -Identity "Administrator"
+
+    Description
+    -----------
+    This will get the lockout (4740) events log from the current domain controller for the Administrator user.
+.NOTES
+    Author: matthewjdegarmo
+    GitHub: https://github.com/matthewjdegarmo
+#>
 Function Get-LockoutSource() {
     [CmdletBinding()]
     Param(
@@ -64,3 +97,4 @@ Function Get-LockoutSource() {
         }
     }
 }
+#EndRegion Get-LockoutSource
