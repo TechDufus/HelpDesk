@@ -38,3 +38,4 @@ This module features some repetitive ActiveDirectory / HelpDesk type tasks that 
 
 `Get-LockedOutADUsers -IncludeLockoutSource` (aliased as `glo`)
 - 'This is f**king awesome!' - Friend's boss.
+- 'Best PS Module I have ever used!' and 'Pretty solid!' - Colleague
