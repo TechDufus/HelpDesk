@@ -20,45 +20,21 @@ Install-Module HelpDesk
 Update-Module HelpDesk
 ```
 
-## Install with Git
-### For Windows PowerShell 5.1 ###
-```powershell
-# For CurrentUser scope
-git clone https://github.com/matthewjdegarmo/HelpDesk.git ($env:PSModulePath -split ';')[0]
+This module features some repetitive ActiveDirectory / HelpDesk type tasks that you hopefully find useful!
 
-# For AllUsers scope. Must be Admin.
-git clone https://github.com/matthewjdegarmo/HelpDesk.git ($env:PSModulePath -split ';')[2]
-```
-### For PowerShell 6.0+ ###
-```powershell
-# For CurrentUser scope
-git clone https://github.com/matthewjdegarmo/HelpDesk.git $PSGetPath.CurrentUserModules
+## Several example tasks:
 
-# For AllUsers scope. Must be Admin.
-git clone https://github.com/matthewjdegarmo/HelpDesk.git $PSGetPath.AllUsersModules
-```
+- Adding / Removing users as Local Admins on their computers.
+  - See [Get-LocalAdmin](https://github.com/matthewjdegarmo/HelpDesk/blob/master/Functions/Public/Get-LocalAdmin.ps1), [Add-LocalAdmin](https://github.com/matthewjdegarmo/HelpDesk/blob/master/Functions/Public/Add-LocalAdmin.ps1), and [Remove-LocalAdmin](https://github.com/matthewjdegarmo/HelpDesk/blob/master/Functions/Public/Remove-LocalAdmin.ps1).
+- Enable / Disable ActiveDirectory user accounts.
+  - See [Enable-Account](https://github.com/matthewjdegarmo/HelpDesk/blob/master/Functions/Public/Enable-Account.ps1) and [Disable-Account](https://github.com/matthewjdegarmo/HelpDesk/blob/master/Functions/Public/Disable-Account.ps1).
+- Get User Lockout information, including the troublesome source of the lockout event.
+  - See [Get-LockedOutADUsers](https://github.com/matthewjdegarmo/HelpDesk/blob/master/Functions/Public/Get-LockedOutADUsers.ps1), and the `-IncludeLockoutSource` parameter.
+- Securely reset user passwords.
+  - See [Reset-Password](https://github.com/matthewjdegarmo/HelpDesk/blob/master/Functions/Public/Reset-Password.ps1).
 
-PowerShell will now Auto-Load the commands in this module.
 
-## Update with Git
-Navigate into the cloned HelpDesk folder and run `git pull` to pull the current main (master) branch.
-### For Windows PowerShell 5.1 ###
-```powershell
-# For CurrentUser scope
-Set-Location (Join-Path -Path ($env:PSModulePath -split ';')[0] -ChildPath HelpDesk)
-git pull
+## Testimonials
 
-# For AllUsers scope. Must be Admin.
-Set-Location (Join-Path -Path ($env:PSModulePath -split ';')[2] -ChildPath HelpDesk)
-git pull
-```
-### For PowerShell 6.0+ ###
-```powershell
-# For CurrentUser scope
-Set-Location (Join-Path -Path $PSGetPath.CurrentUserModules -ChildPath HelpDesk)
-git pull
-
-#For AllUsers scope. Must be Admin
-Set-Location (Join-Path -Path $PSGetPath.AllUsersModules -ChildPath HelpDesk)
-git pull
-```
+`Get-LockedOutADUsers -IncludeLockoutSource` (aliased as `glo`)
+- 'This is f**king awesome!' - Friend's boss.
