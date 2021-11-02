@@ -1,8 +1,16 @@
 # Changelog for HelpDesk
 
+## v1.1.0.1
+
+`Get-LockedOutADUsers`: Aliased as `GLO`
+
++ Added an additional warning message for users who do now have permissions to perform `-IncludeLockoutSource`
+  + This message points them to the help documentation with a suggestion on the permissions they might need to do this in their domain.
+
 ## v1.1.0
 
 `New Features!`:
+
 + `Get-LockedOutADUsers`: Aliased as `GLO`
   + This function just got a big feature for those admins who have access.
   + This function can now provide the source of the user lockout event.

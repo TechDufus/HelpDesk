@@ -58,8 +58,9 @@
     -----------
     This will show all users who are currently locked out and the source computername of the lockout event.
 .NOTES
-    Author: Matthew J. DeGarmo
-    GitHub: https://github.com/matthewjdegarmo
+    Author:  Matthew.DeGarmo
+    Github:  https://github.com/matthewjdegarmo
+    Sponsor: https://github.com/sponsors/matthewjdegarmo
 
     You can either submit a [PR](https://github.com/matthewjdegarmo/HelpDesk/pulls)
         or create an [Issue](https://github.com/matthewjdegarmo/HelpDesk/issues/new)
@@ -92,6 +93,7 @@ Function Get-LockedOutADUsers() {
             Catch {
                 [Switch]$IncludeLockoutSource = $false
                 Write-Warning "You do not have rights to execute remote queries to this Domain Controller: $ComputerName"
+                Write-Warning "Please see 'Get-Help $($MyInvocation.MyCommand) -Parameter IncludeLockoutSource' for more information."
             }
         }
     }
