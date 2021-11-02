@@ -1,6 +1,6 @@
 # Changelog for HelpDesk
 
-## v1.1.0.1
+## v1.1.0.2
 
 `Get-LockedOutADUsers`: Aliased as `GLO`
 

@@ -57,6 +57,18 @@
     Description
     -----------
     This will show all users who are currently locked out and the source computername of the lockout event.
+.EXAMPLE
+    PS>Get-LockedOutADUsers -IncludeLockoutSource
+    You do not have rights to execute remote queries to this Domain Controller: Some-DC-Here
+    Please see 'Get-Help Get-LockedOutADUsers -Parameter IncludeLockoutSource' for more information.
+
+    Name                SamAccountName LockoutTime
+    ----                -------------- -----------
+    DeGarmo, Matthew J. matthewjd      6/26/2019 13:32:15
+
+    Description
+    -----------
+    This will show all users who are currently locked out, while displaying a message letting you know you do not have rights to read these events from the Domain Controller.
 .NOTES
     Author:  Matthew.DeGarmo
     Github:  https://github.com/matthewjdegarmo
