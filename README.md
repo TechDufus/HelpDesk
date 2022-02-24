@@ -3,7 +3,6 @@ Many useful ActiveDirectory and other admin-type utilities typical in a HelpDesk
 
 <!-- [![Build Status](https://dev.azure.com/matthewjdegarmo/HelpDesk/_apis/build/status/matthewjdegarmo.HelpDesk?branchName=master)](https://dev.azure.com/matthewjdegarmo/HelpDesk/_build/latest?definitionId=1&branchName=master) -->
 [![Build](https://github.com/matthewjdegarmo/HelpDesk/workflows/Build%20and%20Publish/badge.svg)](https://github.com/matthewjdegarmo/HelpDesk/actions?query=workflow%3A%22Version+Check+%2B+Publish+to+PSGallery%22)
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/5c2c95ff19f146a8ad59c994bbecbebc)](https://www.codacy.com/manual/matthewjdegarmo/HelpDesk?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=matthewjdegarmo/HelpDesk&amp;utm_campaign=Badge_Grade)
 [![PSGallery](https://img.shields.io/powershellgallery/v/HelpDesk?color=G&label=PowerShell%20Gallery)](https://www.powershellgallery.com/packages/HelpDesk/)
 [![Downloads](https://img.shields.io/powershellgallery/dt/HelpDesk?label=Downloads)](https://www.powershellgallery.com/packages/HelpDesk/)
 [![License](https://img.shields.io/github/license/matthewjdegarmo/HelpDesk?color=g&label=License)](https://github.com/matthewjdegarmo/HelpDesk/blob/master/LICENSE)
