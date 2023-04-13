@@ -15,11 +15,11 @@
     This example shows how to call the Start-MSRA function and automatically connect to the remote computer.
 .NOTES
     Author: Matthew J. DeGarmo
-    GitHub: https://github.com/matthewjdegarmo
+    GitHub: https://github.com/TechDufus
 
-    You can either submit a [PR](https://github.com/matthewjdegarmo/HelpDesk/pulls)
-        or create an [Issue](https://github.com/matthewjdegarmo/HelpDesk/issues/new)
-        on this GitHub project at https://github.com/matthewjdegarmo/HelpDesk
+    You can either submit a [PR](https://github.com/TechDufus/HelpDesk/pulls)
+        or create an [Issue](https://github.com/TechDufus/HelpDesk/issues/new)
+        on this GitHub project at https://github.com/TechDufus/HelpDesk
 #>
 Function Start-MSRA() {
     [CmdletBinding()]

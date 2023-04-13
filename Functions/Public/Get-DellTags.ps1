@@ -45,11 +45,11 @@
     Providing the -ComputerName will attempt to generate this information if the computer is online, and it is a Dell computer.
 .NOTES
     Author: Matthew J. DeGarmo
-    GitHub: https://github.com/matthewjdegarmo
+    GitHub: https://github.com/TechDufus
 
-    You can either submit a [PR](https://github.com/matthewjdegarmo/HelpDesk/pulls)
-        or create an [Issue](https://github.com/matthewjdegarmo/HelpDesk/issues/new)
-        on this GitHub project at https://github.com/matthewjdegarmo/HelpDesk
+    You can either submit a [PR](https://github.com/TechDufus/HelpDesk/pulls)
+        or create an [Issue](https://github.com/TechDufus/HelpDesk/issues/new)
+        on this GitHub project at https://github.com/TechDufus/HelpDesk
 #>
 Function Get-DellTags() {
     [cmdletBinding(DefaultParameterSetName='ComputerName')]

@@ -15,11 +15,11 @@
     This will return a boolean based on if the user is an admin or not.
 .NOTES
     Author: Matthew J. DeGarmo
-    Handle: @matthewjdegarmo
+    Handle: @TechDufus
 
-    You can either submit a [PR](https://github.com/matthewjdegarmo/HelpDesk/pulls)
-        or create an [Issue](https://github.com/matthewjdegarmo/HelpDesk/issues/new)
-        on this GitHub project at https://github.com/matthewjdegarmo/HelpDesk
+    You can either submit a [PR](https://github.com/TechDufus/HelpDesk/pulls)
+        or create an [Issue](https://github.com/TechDufus/HelpDesk/issues/new)
+        on this GitHub project at https://github.com/TechDufus/HelpDesk
 #>
 Function Test-Administrator() {
     [CmdletBinding()]

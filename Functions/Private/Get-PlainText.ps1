@@ -6,7 +6,7 @@
 
 .NOTES
     Author: Matthew J. DeGarmo
-    GitHub: https://github.com/matthewjdegarmo
+    GitHub: https://github.com/TechDufus
 #>
 Function Get-PlainText() {
     [CmdletBinding()]

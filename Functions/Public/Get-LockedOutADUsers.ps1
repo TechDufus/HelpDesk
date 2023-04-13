@@ -71,12 +71,12 @@
     This will show all users who are currently locked out, while displaying a message letting you know you do not have rights to read these events from the Domain Controller.
 .NOTES
     Author:  Matthew.DeGarmo
-    Github:  https://github.com/matthewjdegarmo
-    Sponsor: https://github.com/sponsors/matthewjdegarmo
+    Github:  https://github.com/TechDufus
+    Sponsor: https://github.com/sponsors/TechDufus
 
-    You can either submit a [PR](https://github.com/matthewjdegarmo/HelpDesk/pulls)
-        or create an [Issue](https://github.com/matthewjdegarmo/HelpDesk/issues/new)
-        on this GitHub project at https://github.com/matthewjdegarmo/HelpDesk
+    You can either submit a [PR](https://github.com/TechDufus/HelpDesk/pulls)
+        or create an [Issue](https://github.com/TechDufus/HelpDesk/issues/new)
+        on this GitHub project at https://github.com/TechDufus/HelpDesk
 #>
 Function Get-LockedOutADUsers() {
     [CmdletBinding()]
