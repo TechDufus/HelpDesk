@@ -50,10 +50,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 Author: Matthew J.
 DeGarmo
-Handle: @matthewjdegarmo
+Handle: @TechDufus
 
-You can either submit a \[PR\](https://github.com/matthewjdegarmo/HelpDesk/pulls)
-    or create an \[Issue\](https://github.com/matthewjdegarmo/HelpDesk/issues/new)
-    on this GitHub project at https://github.com/matthewjdegarmo/HelpDesk
+You can either submit a \[PR\](https://github.com/TechDufus/HelpDesk/pulls)
+    or create an \[Issue\](https://github.com/TechDufus/HelpDesk/issues/new)
+    on this GitHub project at https://github.com/TechDufus/HelpDesk
 
 ## RELATED LINKS

@@ -29,8 +29,8 @@
     -----------
     This will get the lockout (4740) events log from the current domain controller for the Administrator user.
 .NOTES
-    Author: matthewjdegarmo
-    GitHub: https://github.com/matthewjdegarmo
+    Author: TechDufus
+    GitHub: https://github.com/TechDufus
 #>
 Function Get-LockoutSource() {
     [CmdletBinding()]

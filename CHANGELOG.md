@@ -1,5 +1,13 @@
 # Changelog for HelpDesk
 
+## v1.1.0.3
+
+`Documentation`:
+
+Updating the Repo owner name to `TechDufus`.
+  - This was a rename of the repo, not an ownership change.
+  - I feel this warranted a version bump to get this updated in all help docs for this module.
+
 ## v1.1.0.2
 
 `Get-LockedOutADUsers`: Aliased as `GLO`
